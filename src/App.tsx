@@ -16,11 +16,14 @@ function App() {
 
     const [filter, setFilter] = useState<filterType>('all')
 
+    const changeTaskStatus = (id: string, isStatus: boolean) => {
+        setTasks(tasks.map((el)=> el.id === id ? ({...el, isDone: isStatus}): el))
+    }
+
     const removeTodolist = (id: string) => {
            let upDateTasks = tasks.filter((t)=> t.id !== id)
             setTasks(upDateTasks);
     }
-
 
      const filterTasks = (titleButton:filterType) => {
         setFilter(titleButton);
@@ -49,6 +52,8 @@ function App() {
                    removeTodolist={removeTodolist}
                    filterTasks={filterTasks}
                    addTask={addTask}
+                   changeTaskStatus={changeTaskStatus}
+                   filter = {filter}
          />
         </div>
     );
