@@ -12,11 +12,12 @@ export type TaskType = {
 export type TodolistType = {
     title: string
     tasks: Array<TaskType>
-    removeTodolist: (id: string)=> void
-    filterTasks: (titleButton: filterType)=> void
-    addTask:(title: string)=> void
-    changeTaskStatus: (id: string, isStatus: boolean)=> void
+    removeTodolist: (todolistID: string, id: string)=> void
+    changeFilter: (todolistID: string,titleButton:filterType)=> void
+    addTask:(todolistID: string,title: string)=> void
+    changeTaskStatus: (todolistID: string, id: string, isStatus: boolean)=> void
     filter: filterType
+    id: string
 }
 
 export const Todolist = (props: TodolistType) => {
@@ -24,10 +25,13 @@ export const Todolist = (props: TodolistType) => {
     const [error, setError]= useState( '')
 
 
-    const removeTaskHandler = (id: string) => {props.removeTodolist(id)}
-    const onClickButtonAll = ()=>props.filterTasks('all')
-    const onClickButtonActive = ()=> props.filterTasks('active')
-    const onClickButtonCompleted = () => props.filterTasks('completed')
+    const removeTaskHandler = (id: string) => {props.removeTodolist(props.id,id)}
+    const onClickButtonAll = ()=>props.changeFilter(props.id,'all')
+    const onClickButtonActive = ()=> {
+        debugger
+        props.changeFilter(props.id, 'active')
+    }
+    const onClickButtonCompleted = () => props.changeFilter(props.id,'completed')
     const changeTitleHandler = (e: ChangeEvent<HTMLInputElement>) =>
     {
         setTitle(e.currentTarget.value)
@@ -35,22 +39,25 @@ export const Todolist = (props: TodolistType) => {
     }
 
 
-    const addTaskHandler = (title: string)=> {
-          if(title.trim() !== ''){
-              props.addTask(title.trim())
-              setTitle('')
-          } else {
-              setError('Title is required')
-          }
+    const addTaskHandler = () => {
+        if (title.trim() !== '') {
+            props.addTask(props.id, title.trim());
+            setTitle('');
+        } else {
+            setError('Title is required');
+        }
+    };
+    const onClickEnterHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') {
+            props.addTask(props.id, title);
+        }
+    };
 
-    }
-    const onClickEnterHandler = (e:KeyboardEvent<HTMLInputElement>) => {
-          if (e.key === 'Enter'){
-              props.addTask(title)
-          }
-    }
+
+
+
    const changeStatusHandler =  (id: string, e: ChangeEvent<HTMLInputElement>) => {
-        props.changeTaskStatus(id, e.currentTarget.checked );
+        props.changeTaskStatus(props.id, id, e.currentTarget.checked );
    }
 
 
@@ -64,7 +71,7 @@ export const Todolist = (props: TodolistType) => {
                            onKeyUp={onClickEnterHandler}
                            className={error ? 'error': ''}
                     />
-                    <button onClick={()=> addTaskHandler(title)}>+</button>
+                    <button onClick={addTaskHandler}>+</button>
                     {error &&  <div  className='error-message'>{error}</div>}
                 </div>
                 <ul>
