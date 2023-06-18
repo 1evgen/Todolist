@@ -1,6 +1,7 @@
 import React, {ChangeEvent, useState} from "react";
 import {Simulate} from "react-dom/test-utils";
 import input = Simulate.input;
+import {TextField} from "@mui/material";
 
 type EditableSpanType = {
     title: string
@@ -27,11 +28,18 @@ export const EditableSpan = (props: EditableSpanType) => {
 
     return (
         editMode ?
-            <input value={title}
-                   onBlur={activateViewMode}
-                   autoFocus
-                   onChange={onChangeTitleHandler}
+            <TextField  value={title}
+                        variant={'standard'}
+                        onBlur={activateViewMode}
+                        autoFocus
+                        onChange={onChangeTitleHandler}
             />
+
+            // <input value={title}
+            //        onBlur={activateViewMode}
+            //        autoFocus
+            //        onChange={onChangeTitleHandler}
+            // />
             : <span onDoubleClick={activateEditMode}>{props.title}</span>
 
 
