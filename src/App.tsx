@@ -13,7 +13,7 @@ type TasksStateType = {
 }
 
 
-type TodolistsType = {
+export type TodolistsType = {
     id: string
     title: string
     filter: filterType
