@@ -8,7 +8,7 @@ import {Menu} from "@mui/icons-material";
 
 
 export type filterType = 'all' | 'active' | 'completed'
-type TasksStateType = {
+export type TasksStateType = {
     [key: string]: Array<TaskType>
 }
 
@@ -72,6 +72,7 @@ function App() {
 
     const removeTodolist = (TodolistID: string) => {
         setTodolists(todolists.filter((el) => el.id !== TodolistID))
+        delete tasks[TodolistID]
         setTasks({...tasks})
     }
 

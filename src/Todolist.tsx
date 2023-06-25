@@ -68,11 +68,6 @@ export const Todolist = (props: TodolistType) => {
                                       checked={t.isDone}
                             />
 
-                            {/*<input className={t.isDone ? 'is-done' : ''}*/}
-                            {/*       type="checkbox"*/}
-                            {/*       onChange={testHandler}*/}
-                            {/*       checked={t.isDone}*/}
-                            {/*/>*/}
                             <EditableSpan title={t.title}
                                           onChange={onChange}
                             />
