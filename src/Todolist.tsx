@@ -21,7 +21,7 @@ export type TodolistType = {
     removeTasks: (todolistID: string, id: string) => void
     changeFilter: (todolistID: string, titleButton: filterType) => void
     addTask: (todolistID: string, title: string) => void
-    changeTaskStatus: (todolistID: string, id: string, isStatus: boolean) => void
+    changeTaskStatus: (todolistID: string, status: boolean,id: string) => void
     removeTodolist: (todolistID: string) => void
     changeTaskTitle: (id: string, newValue: string, todolistID: string) => void
     changeTodolistTitle: (todolistID: string, newValue: string) => void
@@ -37,7 +37,7 @@ export const Todolist = (props: TodolistType) => {
     const onClickButtonCompleted = () => props.changeFilter(props.id, 'completed')
 
     const changeStatusHandler = (id: string, e: ChangeEvent<HTMLInputElement>) => {
-        props.changeTaskStatus(props.id, id, e.currentTarget.checked);
+        props.changeTaskStatus(props.id, e.currentTarget.checked, id);
     }
     const removeTodolistHandler = () => props.removeTodolist(props.id)
     const addTask = (title: string) => props.addTask(props.id, title)
