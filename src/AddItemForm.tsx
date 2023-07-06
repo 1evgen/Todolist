@@ -1,11 +1,12 @@
-import React, {ChangeEvent, KeyboardEvent, useState} from "react";
+import React, {ChangeEvent, KeyboardEvent, useCallback, useState} from "react";
 import {IconButton, TextField} from "@mui/material";
 import {AddCircle} from "@mui/icons-material";
 
 type AddItemFormType = {
     addItemForm: (title:string) => void
 }
-export const AddItemForm = (props: AddItemFormType) => {
+export const AddItemForm = React.memo( (props: AddItemFormType) => {
+    console.log('render AddItemForm')
     const [title, setTitle] = useState('')
     const [error, setError] = useState('')
 
@@ -17,7 +18,8 @@ export const AddItemForm = (props: AddItemFormType) => {
         } else {
             setError('Title is required');
         }
-    };
+    }
+
     const onClickEnterHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
             addTaskHandler()
@@ -52,4 +54,4 @@ export const AddItemForm = (props: AddItemFormType) => {
     )
 
 
-}
+})

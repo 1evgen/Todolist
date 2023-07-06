@@ -49,8 +49,6 @@ export  const removeTodolistAC = (id: string): removeTodolistTypeAction => {
 }
 
 export const addTodolistAC = (title: string):  addTodolistTypeAction => {
-    console.log('a')
-    debugger
     return {type: 'ADD-TODOLIST', titleTodo: title, todolistId: v1()}
 }
 
