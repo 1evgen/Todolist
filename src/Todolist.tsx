@@ -16,7 +16,7 @@ export type TaskType = {
 
 
 export type TodolistType = {
-    id: string
+    todolistId: string
     title: string
     filter: filterType
     tasks: Array<TaskType>
@@ -35,14 +35,14 @@ export const Todolist = React.memo( (props: TodolistType) => {
     // const onClickButtonActive = () => props.changeFilter(props.id, 'active')
     // const onClickButtonCompleted = () => props.changeFilter(props.id, 'completed')
 
-    const removeTodolistHandler = useCallback( () => props.removeTodolist(props.id),
-        [props.removeTodolist,props.id])
+    const removeTodolistHandler = useCallback( () => props.removeTodolist(props.todolistId),
+        [props.removeTodolist,props.todolistId])
 
-    const addTask = useCallback( (title: string) => props.addTask(props.id, title),
-        [props.addTask, props.id])
+    const addTask = useCallback( (title: string) => props.addTask(props.todolistId, title),
+        [props.addTask, props.todolistId])
 
     const changeTodolistHandler = useCallback( (newValue: string)=> {
-        props.changeTodolistTitle(props.id, newValue)},[props.changeTodolistTitle, props.id])
+        props.changeTodolistTitle(props.todolistId, newValue)},[props.changeTodolistTitle, props.todolistId])
 
 
     let tasksForTodolist = props.tasks;
@@ -67,13 +67,13 @@ export const Todolist = React.memo( (props: TodolistType) => {
                     {tasksForTodolist.map((t) => ( <Task changeTaskTitle={props.changeTaskTitle}
                                                          changeTaskStatus={props.changeTaskStatus}
                                                          removeTasks={props.removeTasks}
-                                                         id={props.id}
+                                                         todolistId={props.todolistId}
                                                          task={t}
                                                          key={t.id}
                     />))}
                 </ul>
 
-                <FilterButtons filter={props.filter} changeFilter={props.changeFilter} id={props.id}/>
+                <FilterButtons filter={props.filter} changeFilter={props.changeFilter} id={props.todolistId}/>
                 {/*<div>*/}
                 {/*    <Button variant={props.filter === 'all' ? 'contained' : 'text'}*/}
                 {/*            onClick={onClickButtonAll}>All*/}

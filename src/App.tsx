@@ -130,7 +130,7 @@ function App() {
                     return <Grid item>
                         <Paper style= {{padding: "20px"}}>
                     <Todolist        title={t.title}
-                                     id={t.id}
+                                     todolistId={t.id}
                                      tasks={taskfiltred}
                                      removeTasks={removeTasks}
                                      changeFilter={changeFilter}

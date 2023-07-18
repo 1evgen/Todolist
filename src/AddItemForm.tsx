@@ -2,9 +2,15 @@ import React, {ChangeEvent, KeyboardEvent, useCallback, useState} from "react";
 import {IconButton, TextField} from "@mui/material";
 import {AddCircle} from "@mui/icons-material";
 
+
+
+
 type AddItemFormType = {
     addItemForm: (title:string) => void
 }
+
+
+
 export const AddItemForm = React.memo( (props: AddItemFormType) => {
     console.log('render AddItemForm')
     const [title, setTitle] = useState('')

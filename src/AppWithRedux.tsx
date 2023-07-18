@@ -92,7 +92,7 @@ const AppWithRedux  = React.memo( () =>  {
                     return <Grid item>
                         <Paper style= {{padding: "20px"}}>
                     <Todolist        title={tl.title}
-                                     id={tl.id}
+                                     todolistId={tl.id}
                                      tasks={tasksForTodolist}
                                      removeTasks={removeTasks}
                                      changeFilter={changeFilter}
