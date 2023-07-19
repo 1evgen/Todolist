@@ -17,6 +17,7 @@ import {v1} from "uuid";
 
 
 export type filterType = 'all' | 'active' | 'completed'
+
 export type TasksStateType = {
     [key: string]: Array<TaskType>
 }
@@ -87,13 +88,11 @@ const AppWithRedux  = React.memo( () =>  {
                 <Grid container spacing={10} >
             {
                 todolists.map(tl => {
-                    let allTodolistTasks = tasks[tl.id];
-                     let tasksForTodolist = allTodolistTasks;
                     return <Grid item>
                         <Paper style= {{padding: "20px"}}>
                     <Todolist        title={tl.title}
-                                     todolistId={tl.id}
-                                     tasks={tasksForTodolist}
+                                     id={tl.id}
+                                     tasks={tasks[tl.id]}
                                      removeTasks={removeTasks}
                                      changeFilter={changeFilter}
                                      addTask={addTask}

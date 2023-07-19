@@ -30,7 +30,7 @@ export const TaskStories_2: Story = {
         changeTaskTitle={action('change story')}
         changeTaskStatus={action('change status')}
         removeTasks={action('remove task')}
-        todolistId={'swdedf22d1'}
+        id={'swdedf22d1'}
         task={{id: '2', title: 'TypeScript', isDone: false}}/>
 };
 
@@ -41,13 +41,13 @@ export const TasksStory_3: Story = {
                 changeTaskTitle={action('change story')}
                 changeTaskStatus={action('change status')}
                 removeTasks={action('remove task')}
-                todolistId={'swdedf22d1'}
+                id={'swdedf22d1'}
                 task={{id: '1', title: 'TypeScript', isDone: true}}/>
             <Task
                 changeTaskTitle={action('change story')}
                 changeTaskStatus={action('change status')}
                 removeTasks={action('remove task')}
-                todolistId={'swdedf22d2'}
+                id={'swdedf22d2'}
                 task={{id: '2', title: 'JS', isDone: false}}/>
         </div>
     )
@@ -62,14 +62,14 @@ const  TaskWithHook: React.FC<TasksTypeProps> = (args)=> {
         return <Task changeTaskTitle={changeTaskTitle}
                      changeTaskStatus={changeTaskStatus}
                      removeTasks={args.removeTasks}
-                     todolistId={args.todolistId}
+                     id={args.id}
                      task={tasks}
         />
 }
 
 export const uncontrolledTask: Story = {
     args: {
-        todolistId: "ewew2-112w-2123",
+        id: "ewew2-112w-2123",
         task: {id: "we22-as6l-12dd", title: 'JS', isDone: true},
         removeTasks: action("delete task")
     },
@@ -77,7 +77,7 @@ export const uncontrolledTask: Story = {
     render: (args)=> <TaskWithHook changeTaskTitle={args.changeTaskTitle}
                        changeTaskStatus={args.changeTaskStatus}
                        removeTasks={args.removeTasks}
-                       todolistId={args.todolistId}
+                       id={args.id}
                        task={args.task}/>
 
 }
