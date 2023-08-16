@@ -10,7 +10,7 @@ export const rootReducer = combineReducers({
     tasks: tasksReducer,
     todolist: todolistsReducer
 })
-
+export type AppRootStateType = ReturnType<typeof rootReducer>
 
 const initialGlobalState = {
     todolist: [
@@ -28,7 +28,7 @@ const initialGlobalState = {
         ]
     }
 };
-export type AppRootStateType = ReturnType<typeof rootReducer>
+
 export const storyBookStore = legacy_createStore(rootReducer, initialGlobalState as AppRootStateType);
 
 
