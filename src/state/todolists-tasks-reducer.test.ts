@@ -1,11 +1,12 @@
 import {TasksStateType} from "../App";
-import {addTodolistAC, removeTodolistAC, todolistsReducer} from "./todolistReducer";
-import {TodolistType} from "../Todolist";
+import {addTodolistAC, removeTodolistAC, TodolistDomainType, todolistsReducer} from "./todolistReducer";
 import {tasksReducer} from "./task-reducer";
+import {TaskPriorities, TaskStatues} from "../api/todolist-api";
+
 
 test('id should be equals', () => {
     const startTasksState: TasksStateType = {}
-    const startTodolistsState: Array<TodolistType> = []
+    const startTodolistsState: Array<TodolistDomainType> = []
 
     const action = addTodolistAC('new todolist')
 
@@ -23,15 +24,19 @@ test('id should be equals', () => {
 
 test('property with todolistId should be deleted', () => {
     const startState: TasksStateType = {
-        'todolistId1': [
-            {id: '1', title: 'CSS', isDone: false},
-            {id: '2', title: 'JS', isDone: true},
-            {id: '3', title: 'React', isDone: false}
-        ],
+            'todolistId1': [
+                {id: '1', title: 'CSS', status: TaskStatues.New, todoListId:'todolistId1', description: "",
+                    startDate: '', deadline: '', addedDate: '', priority: TaskPriorities.Low, order:0},
+                {id: '2', title: 'JS', status: TaskStatues.Completed, todoListId:'todolistId1', description: "",
+                    startDate: '', deadline: '', addedDate: '', priority: TaskPriorities.Low, order:0},
+                {id: '3', title: 'React', status: TaskStatues.New, todoListId:'todolistId1', description: "",
+                    startDate: '', deadline: '', addedDate: '', priority: TaskPriorities.Low, order:0}
+            ],
         'todolistId2': [
-            {id: '1', title: 'bread', isDone: false},
-            {id: '2', title: 'milk', isDone: true},
-            {id: '3', title: 'tea', isDone: false}
+            {id: '1', title: 'bread', status: TaskStatues.New, todoListId:'todolistId1', description: "",
+                startDate: '', deadline: '', addedDate: '', priority: TaskPriorities.Low, order:0},
+            {id: '3', title: 'tea', status: TaskStatues.New, todoListId:'todolistId1', description: "",
+                startDate: '', deadline: '', addedDate: '', priority: TaskPriorities.Low, order:0}
         ]
     }
 

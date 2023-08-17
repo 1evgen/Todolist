@@ -1,8 +1,7 @@
-import {filterType, TasksStateType, TodolistsType} from "../App";
+import {TasksStateType, } from "../App";
 import {v1} from "uuid";
-import {debounce} from "@mui/material";
-import {TaskType} from "../Todolist";
 import {addTodolistTypeAction, removeTodolistTypeAction} from "./todolistReducer";
+import {TaskPriorities, TaskStatues, TaskType} from "../api/todolist-api";
 
 
 type removeTaskTypeAction = {
@@ -21,7 +20,7 @@ type addTaskTypeAction  = {
 type changeTaskStatus = {
     type: 'CHANGE-TASK-STATUS'
     todolistID: string
-    status: boolean,
+    status: TaskStatues,
     taskID: string
 }
 
@@ -43,14 +42,16 @@ export  const tasksReducer = (state: TasksStateType = {}, action: actionType): T
             return {...state,
             [action.todolistID]: state[action.todolistID].filter((el)=> el.id !== action.taskID)}
         case 'ADD_TASK':
-            let newTask = {id: v1(), title: action.titleTodo, isDone: false}
+            let newTask: TaskType = {id: v1(), title: action.titleTodo, status: TaskStatues.New,
+                todoListId: action.todolistID, description: '', priority: TaskPriorities.Low,
+                startDate: '', deadline: '', order: 0, addedDate: ''}
             return  {...state,
             [action.todolistID]: [newTask,...state[action.todolistID],]}
 
         case 'CHANGE-TASK-STATUS' :
             return {...state,
                 [action.todolistID]:
-                    state[action.todolistID].map((el)=> el.id === action.taskID ? {...el, isDone: action.status}:el)
+                    state[action.todolistID].map((el)=> el.id === action.taskID ? {...el, status: action.status}:el)
             }
 
         case  'CHANGE-TASK-TITLE' :
@@ -83,7 +84,7 @@ export const addTaskAC = (titleTodo: string, todolistID: string):addTaskTypeActi
     return {type: "ADD_TASK", titleTodo, todolistID}
 
 }
-export const changeTaskStatusAC = (todolistID: string, status: boolean,taskID: string): changeTaskStatus => {
+export const changeTaskStatusAC = (todolistID: string, status: TaskStatues,taskID: string): changeTaskStatus => {
         return {type: "CHANGE-TASK-STATUS", todolistID, status, taskID}
 }
 

@@ -1,47 +1,41 @@
 import React, {useCallback, useReducer, useState} from 'react';
 import './App.css';
-import {TaskType, Todolist} from "./Todolist";
 import {AddItemForm} from "./AddItemForm";
 import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@mui/material";
 import {Menu} from "@mui/icons-material";
 import {
     addTodolistAC,
     changeFilterAC,
-    changeTodolistTitleAC,
-    removeTodolistAC,
+    changeTodolistTitleAC, FilterValueType,
+    removeTodolistAC, TodolistDomainType,
 } from "./state/todolistReducer";
 import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC} from "./state/task-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "./state/store";
-import {v1} from "uuid";
+import {TaskStatues, TaskType} from "./api/todolist-api";
+import {Todolist} from "./Todolist";
 
-
-export type filterType = 'all' | 'active' | 'completed'
 
 export type TasksStateType = {
     [key: string]: Array<TaskType>
 }
 
-export type TodolistsType = {
-    id: string
-    title: string
-    filter: filterType
-}
+
 
 const AppWithRedux  = React.memo( () =>  {
     console.log('render App')
-    const todolists = useSelector<AppRootStateType,Array<TodolistsType>>(state => state.todolist)
+    const todolists = useSelector<AppRootStateType,Array<TodolistDomainType>>(state => state.todolist)
     const tasks = useSelector<AppRootStateType, TasksStateType>(state => state.tasks)
     const dispatch = useDispatch();
 
-    const changeTaskStatus = useCallback ((todolistID: string,  status: boolean, id: string,) => {
+    const changeTaskStatus = useCallback ((todolistID: string,  status: TaskStatues, id: string,) => {
         dispatch(changeTaskStatusAC(todolistID, status, id))
     }, [dispatch])
     const removeTasks = useCallback ((todolistID: string, id: string) => {
         dispatch(removeTaskAC(id, todolistID))
     },[dispatch])
 
-    const changeFilter = useCallback ((todolistID: string, titleButton: filterType) => {
+    const changeFilter = useCallback ((todolistID: string, titleButton: FilterValueType) => {
         dispatch(changeFilterAC(todolistID, titleButton))
     },[dispatch])
 

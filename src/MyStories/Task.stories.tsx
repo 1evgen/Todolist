@@ -1,8 +1,9 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type {Meta, StoryObj} from '@storybook/react';
 import {Task, TasksTypeProps} from "../Task";
 import {action} from "@storybook/addon-actions";
-import {TaskType} from "../Todolist";
 import React, {useState} from "react";
+import {v1} from "uuid";
+import {TaskPriorities, TaskStatues} from "../api/todolist-api";
 
 const meta: Meta<typeof Task> = {
     title: 'Todolist/Task',
@@ -18,7 +19,8 @@ type Story = StoryObj<typeof Task>;
 
 export const TaskStories: Story = {
      args: {
-            task: {id: '1', title: 'JS', isDone: true},
+            task: {id: v1(),  title: 'JS', status: TaskStatues.Completed, todoListId:"todolistId1", startDate: '',
+                deadline: '',addedDate: '', order: 0, priority: TaskPriorities.Low, description: ''},
             changeTaskTitle: action('change task title'),
             changeTaskStatus: action('will be change status'),
             removeTasks: action('will be remove task')
@@ -31,7 +33,8 @@ export const TaskStories_2: Story = {
         changeTaskStatus={action('change status')}
         removeTasks={action('remove task')}
         id={'swdedf22d1'}
-        task={{id: '2', title: 'TypeScript', isDone: false}}/>
+        task={{id: '2', title: 'TypeScript', status: TaskStatues.New, todoListId:"swdedf22d1", startDate: '',
+            deadline: '',addedDate: '', order: 0, priority: TaskPriorities.Low, description: ''}}/>
 };
 
 export const TasksStory_3: Story = {
@@ -42,13 +45,16 @@ export const TasksStory_3: Story = {
                 changeTaskStatus={action('change status')}
                 removeTasks={action('remove task')}
                 id={'swdedf22d1'}
-                task={{id: '1', title: 'TypeScript', isDone: true}}/>
+                task={{id: '2', title: 'TypeScript', status: TaskStatues.New, todoListId:"swdedf22d1", startDate: '',
+                    deadline: '',addedDate: '', order: 0, priority: TaskPriorities.Low, description: ''}}/>
             <Task
                 changeTaskTitle={action('change story')}
                 changeTaskStatus={action('change status')}
                 removeTasks={action('remove task')}
                 id={'swdedf22d2'}
-                task={{id: '2', title: 'JS', isDone: false}}/>
+                task={{id: v1(), title: 'HTML&CSS', status: TaskStatues.Completed, todoListId:"todolistId1", startDate: '',
+                    deadline: '', addedDate: '', order: 0, priority: TaskPriorities.Low, description: '',
+                }}/>
         </div>
     )
 }
@@ -56,7 +62,7 @@ export const TasksStory_3: Story = {
 const  TaskWithHook: React.FC<TasksTypeProps> = (args)=> {
         const [tasks, setTasks]= useState(args.task)
         const changeTaskTitle = (id: string,title: string)=> {setTasks({...tasks, title})}
-        const changeTaskStatus = (id: string) => {setTasks({...tasks, isDone: !tasks.isDone})}
+        const changeTaskStatus = (id: string) => {setTasks({...tasks, status: TaskStatues.New})}
 
 
         return <Task changeTaskTitle={changeTaskTitle}
@@ -70,7 +76,8 @@ const  TaskWithHook: React.FC<TasksTypeProps> = (args)=> {
 export const uncontrolledTask: Story = {
     args: {
         id: "ewew2-112w-2123",
-        task: {id: "we22-as6l-12dd", title: 'JS', isDone: true},
+        task: {id: v1(),  title: 'JS', status: TaskStatues.Completed, todoListId:"todolistId1", startDate: '',
+            deadline: '',addedDate: '', order: 0, priority: TaskPriorities.Low, description: ''},
         removeTasks: action("delete task")
     },
 

@@ -1,21 +1,20 @@
 import {v1} from "uuid";
-import {filterType, TodolistsType} from "../App";
 import {
     addTodolistAC,
     changeFilterAC,
-    changeTodolistTitleAC,
-    removeTodolistAC,
+    changeTodolistTitleAC, FilterValueType,
+    removeTodolistAC, TodolistDomainType,
     todolistsReducer
 } from "./todolistReducer";
 
 let todolistId1 = v1()
 let todolistId2 = v1()
-let startState: Array<TodolistsType> ;
+let startState: Array<TodolistDomainType> ;
 
 beforeEach(()=> {
      startState  = [
-        {id: todolistId1, title: 'What to learn', filter: 'all'},
-        {id: todolistId2, title: 'What to buy', filter: 'all'}
+        {id: todolistId1, title: 'What to learn', filter: 'all', addedDate:'', order: 0},
+        {id: todolistId2, title: 'What to buy', filter: 'all', addedDate:'', order: 0}
     ]
 })
 
@@ -48,7 +47,7 @@ test('correct todolist should change its name', () => {
 })
 
 test('correct filter of todolist should be changed', () => {
-    let newFilter: filterType = 'completed'
+    let newFilter: FilterValueType = 'completed'
     const endState = todolistsReducer(startState,  changeFilterAC(todolistId1, newFilter))
 
     expect(endState[0].filter).toBe(newFilter)

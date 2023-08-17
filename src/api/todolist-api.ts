@@ -26,15 +26,28 @@ type ResponseType<D = {}> = {
     data: D
 }
 
+export enum TaskStatues {
+    New,
+    InProgress = 1,
+    Completed,
+    Draft
+}
 
-type TaskType = {
+export enum TaskPriorities {
+    Low,
+    Middle,
+    Hi,
+    Urgently,
+    Later
+}
+
+export type TaskType = {
     id: string
     todoListId: string
     title: string
     description: string
-    completed: boolean
-    status: number
-    priority: number
+    status: TaskStatues
+    priority: TaskPriorities
     startDate: string
     deadline: string
     order: number
@@ -82,7 +95,6 @@ export const todolistApi = {
             const newTask = {
                 title: '',
                 description: '',
-                completed: false,
                 status: 0,
                 priority: 0,
                 startDate: '',
