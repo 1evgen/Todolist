@@ -90,3 +90,24 @@ export const UpdateTask = ()=> {
     },[])
     return <div>{JSON.stringify(state)}</div>
 }
+
+export const CreateTaskWithHelpInput = () => {
+
+    const [state, setState] = useState<any>(null)
+    const [taskTitle, setTaskTitle]= useState('')
+    const [todolistId, setTodolistId]= useState('')
+
+        const createTaskTitle = ()=> {
+            todolistApi.createTask(todolistId, taskTitle).then((resp) => setState(resp.data))
+        }
+
+    return <div> {JSON.stringify(state)}
+        <input placeholder={'todolistId'} value={todolistId}
+               onChange={(e)=> setTodolistId(e.currentTarget.value)}/>
+        <input placeholder={'TaskTitle'} value={taskTitle}
+               onChange={(e)=> setTaskTitle(e.currentTarget.value)}/>
+        <button onChange={createTaskTitle}>create title fot task</button>
+    </div>
+
+}
+
