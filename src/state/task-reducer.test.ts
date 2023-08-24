@@ -1,9 +1,9 @@
 import {TasksStateType} from '../App'
-import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC, tasksReducer,} from "./task-reducer";
+import {addTaskAC, removeTaskAC, tasksReducer, updateTaskAC,} from "./task-reducer";
 
 
 import {addTodolistAC, TodolistDomainType} from "./todolistReducer";
-import {TaskPriorities, TaskStatuses} from "../api/todolist-api";
+import {TaskPriorities, TaskStatuses, UpdateTaskModelType} from "../api/todolist-api";
 
 let startState: TasksStateType ;
 beforeEach(()=> {
@@ -62,21 +62,35 @@ test('correct task should be added to correct array', () => {
 })
 
 test('status of specified task should be changed', () => {
-
-    const action = changeTaskStatusAC('todolistId2', TaskStatuses.New, '3')
+    const modele: UpdateTaskModelType = {
+        title: "CSS",
+        deadline: '',
+        status: TaskStatuses.Completed,
+        description: '',
+        priority: TaskPriorities.Low,
+        startDate: ''
+    }
+    const action = updateTaskAC('todolistId1', '1', modele)
     const endState = tasksReducer(startState, action)
 
-    expect(endState['todolistId2'][1].status).toBe(TaskStatuses.New)
+
     expect(endState['todolistId1'][1].status).toBe(TaskStatuses.Completed)
 })
 
 test('change task title', ()=> {
-
-    const action = changeTaskTitleAC('1', "butter", 'todolistId2')
+    const modele: UpdateTaskModelType = {
+        title: "Angular",
+        deadline: '',
+        status: TaskStatuses.Completed,
+        description: '',
+        priority: TaskPriorities.Low,
+        startDate: ''
+    }
+    const action = updateTaskAC('todolistId1', "1", modele)
     const endState = tasksReducer(startState, action)
 
-    expect(endState['todolistId2'][0].title).toBe('butter')
-    expect(endState['todolistId2'][1].title).toBe('tea')
+    expect(endState['todolistId1'][0].title).toBe('Angular')
+    expect(endState['todolistId1'][1].title).toBe('JS')
 })
 
 

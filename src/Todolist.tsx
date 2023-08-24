@@ -12,7 +12,6 @@ import {AppDispatch} from "./state/store";
 import {fetchTaskTC} from "./state/task-reducer";
 
 
-
 export type TodolistType = {
     id: string
     title: string
@@ -33,9 +32,6 @@ export const Todolist = React.memo( (props: TodolistType) => {
     useEffect(()=> {
         dispatch(fetchTaskTC(props.id))
     },[])
-
-
-
 
     const removeTodolistHandler = useCallback( () => props.removeTodolist(props.id),
         [props.removeTodolist,props.id])
