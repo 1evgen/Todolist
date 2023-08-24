@@ -5,7 +5,7 @@ import {AddItemForm} from "./AddItemForm";
 import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@mui/material";
 import {Menu} from "@mui/icons-material";
 import {FilterValueType, TodolistDomainType} from "./state/todolistReducer";
-import {TaskPriorities, TaskStatues, TaskType} from "./api/todolist-api";
+import {TaskPriorities, TaskStatuses, TaskType} from "./api/todolist-api";
 import {Todolist} from "./Todolist";
 
 
@@ -27,24 +27,24 @@ function App() {
 
     let [tasks, setTasks] = useState<TasksStateType>({
         [todolistID1]: [
-            {id: v1(), title: 'HTML&CSS', status: TaskStatues.Completed, todoListId:todolistID1, startDate: '',
+            {id: v1(), title: 'HTML&CSS', status: TaskStatuses.Completed, todoListId:todolistID1, startDate: '',
                 deadline: '', addedDate: '', order: 0, priority: TaskPriorities.Low, description: '',
             },
-            {id: v1(),  title: 'JS', status: TaskStatues.Completed, todoListId:todolistID1, startDate: '',
+            {id: v1(),  title: 'JS', status: TaskStatuses.Completed, todoListId:todolistID1, startDate: '',
                 deadline: '',addedDate: '', order: 0, priority: TaskPriorities.Low, description: ''},
 
 
         ],
         [todolistID2]: [
-            {id: v1(), title: 'Car', status: TaskStatues.Completed, todoListId:todolistID2, startDate: '',
+            {id: v1(), title: 'Car', status: TaskStatuses.Completed, todoListId:todolistID2, startDate: '',
                 deadline: '', addedDate: '', order: 0, priority: TaskPriorities.Low, description: ''},
-            {id: v1(), title: 'apartment',status: TaskStatues.Completed, todoListId:todolistID2, startDate: '',
+            {id: v1(), title: 'apartment',status: TaskStatuses.Completed, todoListId:todolistID2, startDate: '',
                 deadline: '', addedDate: '', order: 0, priority: TaskPriorities.Low, description: ''},
         ]
     })
 
 
-    const changeTaskStatus = (todolistID: string, status: TaskStatues, id: string) => {
+    const changeTaskStatus = (todolistID: string, status: TaskStatuses, id: string) => {
         setTasks({
             ...tasks,
             [todolistID]:
@@ -63,7 +63,7 @@ function App() {
     }
 
     const addTask = (todolistID: string, title: string) => {
-        let newTask = {id: v1(), title, status: TaskStatues.New, todoListId:todolistID, startDate: '',
+        let newTask = {id: v1(), title, status: TaskStatuses.New, todoListId:todolistID, startDate: '',
             deadline: '', addedDate: '', order: 0, priority: TaskPriorities.Low, description: '',}
         setTasks({...tasks, [todolistID]: [newTask, ...tasks[todolistID]]})
     }
@@ -119,10 +119,10 @@ function App() {
                 todolists.map((t) => {
                     let taskfiltred = tasks[t.id];
                     if (t.filter === 'active') {
-                        taskfiltred = taskfiltred.filter((el) => el.status === TaskStatues.New)
+                        taskfiltred = taskfiltred.filter((el) => el.status === TaskStatuses.New)
                     }
                     if (t.filter === 'completed') {
-                        taskfiltred = taskfiltred.filter((el) => el.status === TaskStatues.Completed)
+                        taskfiltred = taskfiltred.filter((el) => el.status === TaskStatuses.Completed)
                     }
 
                     return <Grid item>

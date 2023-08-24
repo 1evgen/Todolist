@@ -3,7 +3,7 @@ import {
     addTodolistAC,
     changeFilterAC,
     changeTodolistTitleAC, FilterValueType,
-    removeTodolistAC, TodolistDomainType,
+    removeTodolistAC, setTodolistAC, TodolistDomainType,
     todolistsReducer
 } from "./todolistReducer";
 
@@ -21,18 +21,25 @@ beforeEach(()=> {
 
 test('correct todolist should be removed', () => {
     const endState = todolistsReducer(startState, removeTodolistAC(todolistId1))
-
+    console.log(endState)
     expect(endState.length).toBe(1)
     expect(endState[0].id).toBe(todolistId2)
 })
 
 
 test('correct todolist should be added', ()=> {
-    let newTodolistTitle = 'New todolist'
-    const endState = todolistsReducer(startState, addTodolistAC(newTodolistTitle) )
+    let newTodolist: TodolistDomainType = {
+        id: '1111',
+        title: 'hello',
+        filter: "all",
+        addedDate: '111',
+        order: 0
+    }
 
-    expect(endState.length).toBe(3)
-    expect(endState[0].title).toBe(newTodolistTitle)
+
+    const endState = todolistsReducer(startState, addTodolistAC(newTodolist) )
+
+    expect(endState.length).toBe(4)
 
 })
 
@@ -52,4 +59,12 @@ test('correct filter of todolist should be changed', () => {
 
     expect(endState[0].filter).toBe(newFilter)
     expect(endState[1].filter).toBe('all')
+})
+
+test('set todolist with server', ()=> {
+    const initialState = {
+    id: todolistId1, title: 'What to learn'
+    }
+
+
 })

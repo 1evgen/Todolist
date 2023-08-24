@@ -77,19 +77,19 @@ export const RemoveTask = ()=> {
     return <div>{JSON.stringify(state)}</div>
 }
 
-export const UpdateTask = ()=> {
-    const [state, setState]= useState<any>(null)
-
-    useEffect(()=> {
-        let todolistId = 'b7968193-99da-4103-b972-7a90dba1b993'
-        let taskId = '43f54ecb-90d9-4d2e-8537-d849d167310e'
-        let newTask = 'GERMANY'
-
-        todolistApi.updateTask(todolistId, taskId, newTask)
-            .then((response)=> setState(response.data))
-    },[])
-    return <div>{JSON.stringify(state)}</div>
-}
+// export const UpdateTask = ()=> {
+//     const [state, setState]= useState<any>(null)
+//
+//     useEffect(()=> {
+//         let todolistId = 'b7968193-99da-4103-b972-7a90dba1b993'
+//         let taskId = '43f54ecb-90d9-4d2e-8537-d849d167310e'
+//         let newTask = 'GERMANY'
+//
+//         todolistApi.updateTask(todolistId, taskId, newTask)
+//             .then((response)=> setState(response.data))
+//     },[])
+//     return <div>{JSON.stringify(state)}</div>
+// }
 
 export const CreateTaskWithHelpInput = () => {
 

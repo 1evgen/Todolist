@@ -4,7 +4,7 @@ import {combineReducers, createStore, legacy_createStore} from "redux";
 import {v1} from "uuid";
 import {tasksReducer} from "../../state/task-reducer";
 import {todolistsReducer} from "../../state/todolistReducer";
-import {TaskPriorities, TaskStatues} from "../../api/todolist-api";
+import {TaskPriorities, TaskStatuses} from "../../api/todolist-api";
 
 
 export const rootReducer = combineReducers({
@@ -20,16 +20,16 @@ const initialGlobalState = {
     ] ,
     tasks: {
         ["todolistId1"]: [
-            {id: v1(), title: 'HTML&CSS', status: TaskStatues.New, todoListId:"todolistId1", startDate: '',
+            {id: v1(), title: 'HTML&CSS', status: TaskStatuses.New, todoListId:"todolistId1", startDate: '',
                 deadline: '', addedDate: '', order: 0, priority: TaskPriorities.Low, description: '',
             },
-            {id: v1(),  title: 'JS', status: TaskStatues.Completed, todoListId:"todolistId1", startDate: '',
+            {id: v1(),  title: 'JS', status: TaskStatuses.Completed, todoListId:"todolistId1", startDate: '',
                 deadline: '',addedDate: '', order: 0, priority: TaskPriorities.Low, description: ''},
         ],
         ["todolistId2"]: [
-            {id: v1(), title: 'Car', status: TaskStatues.New, todoListId:"todolistId2", startDate: '',
+            {id: v1(), title: 'Car', status: TaskStatuses.New, todoListId:"todolistId2", startDate: '',
                 deadline: '', addedDate: '', order: 0, priority: TaskPriorities.Low, description: ''},
-            {id: v1(), title: 'apartment',status: TaskStatues.Completed, todoListId:"todolistId2", startDate: '',
+            {id: v1(), title: 'apartment',status: TaskStatuses.Completed, todoListId:"todolistId2", startDate: '',
                 deadline: '', addedDate: '', order: 0, priority: TaskPriorities.Low, description: ''},
         ]
     }

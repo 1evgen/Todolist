@@ -1,18 +1,23 @@
-import React, {useCallback, useReducer, useState} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import './App.css';
 import {AddItemForm} from "./AddItemForm";
 import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@mui/material";
 import {Menu} from "@mui/icons-material";
 import {
-    addTodolistAC,
-    changeFilterAC,
-    changeTodolistTitleAC, FilterValueType,
-    removeTodolistAC, TodolistDomainType,
+    addTodolistTC,
+    changeFilterAC, changeTodolistTC,
+    changeTodolistTitleAC, fetchTodolistsTC, FilterValueType,
+    removeTodolistTC, TodolistDomainType,
 } from "./state/todolistReducer";
-import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC} from "./state/task-reducer";
+import {
+    addTaskTC,
+    changeTaskStatusAC,
+    changeTaskTitleAC,
+    removeTaskTS, updateTaskTC
+} from "./state/task-reducer";
 import {useDispatch, useSelector} from "react-redux";
-import {AppRootStateType} from "./state/store";
-import {TaskStatues, TaskType} from "./api/todolist-api";
+import {AppDispatch, AppRootStateType} from "./state/store";
+import {TaskStatuses, TaskType} from "./api/todolist-api";
 import {Todolist} from "./Todolist";
 
 
@@ -20,19 +25,23 @@ export type TasksStateType = {
     [key: string]: Array<TaskType>
 }
 
-
-
 const AppWithRedux  = React.memo( () =>  {
-    console.log('render App')
+
     const todolists = useSelector<AppRootStateType,Array<TodolistDomainType>>(state => state.todolist)
     const tasks = useSelector<AppRootStateType, TasksStateType>(state => state.tasks)
-    const dispatch = useDispatch();
+    const dispatch: AppDispatch = useDispatch();
 
-    const changeTaskStatus = useCallback ((todolistID: string,  status: TaskStatues, id: string,) => {
-        dispatch(changeTaskStatusAC(todolistID, status, id))
+    useEffect(()=> {
+            dispatch(fetchTodolistsTC())
+    },[])
+
+
+    const changeTaskStatus = useCallback ((todolistID: string, status: TaskStatuses, id: string,) => {
+        dispatch(updateTaskTC(todolistID, id, {status}))
     }, [dispatch])
+
     const removeTasks = useCallback ((todolistID: string, id: string) => {
-        dispatch(removeTaskAC(id, todolistID))
+        dispatch(removeTaskTS(todolistID, id))
     },[dispatch])
 
     const changeFilter = useCallback ((todolistID: string, titleButton: FilterValueType) => {
@@ -40,25 +49,23 @@ const AppWithRedux  = React.memo( () =>  {
     },[dispatch])
 
     const addTask = useCallback ((todolistID: string, title: string) => {
-        dispatch(addTaskAC(title, todolistID))
+        dispatch(addTaskTC(todolistID,title))
     },[dispatch])
 
     const removeTodolist = useCallback ((TodolistID: string) => {
-        const action = removeTodolistAC(TodolistID)
-        dispatch(action)
+        dispatch(removeTodolistTC(TodolistID))
     },[dispatch])
 
     const addTodolist = useCallback ((title: string) => {
-        const action = addTodolistAC(title)
+        const action = addTodolistTC(title)
         dispatch(action)
     },[dispatch])
 
     const changeTaskTitle = useCallback ((id: string,  newValue: string, todolistID: string) => {
-        debugger
-        dispatch(changeTaskTitleAC(id,newValue,todolistID))},[dispatch])
+        dispatch(updateTaskTC(todolistID, id, {title: newValue}))},[dispatch])
 
     const changeTodolistTitle = useCallback( (todolistID: string, newValue: string)=> {
-        dispatch(changeTodolistTitleAC(todolistID, newValue))
+        dispatch(changeTodolistTC(todolistID, newValue))
     },[dispatch])
 
     return (
@@ -84,7 +91,7 @@ const AppWithRedux  = React.memo( () =>  {
                 todolists.map(tl => {
                     return <Grid item>
                         <Paper style= {{padding: "20px"}}>
-                    <Todolist        title={tl.title}
+                        <Todolist     title={tl.title}
                                      id={tl.id}
                                      tasks={tasks[tl.id]}
                                      removeTasks={removeTasks}
