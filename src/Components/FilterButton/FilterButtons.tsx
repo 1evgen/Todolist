@@ -1,9 +1,6 @@
 import React, {useCallback} from "react";
 import {Button} from "@mui/material";
-import {FilterValueType} from "./state/todolistReducer";
-
-
-
+import {FilterValueType} from "../../features/TodolistsList/todolistReducer";
 
 type FilterButtonsType = {
     filter: FilterValueType
@@ -11,9 +8,7 @@ type FilterButtonsType = {
     id: string
 }
 
-
 export const FilterButtons = React.memo(  (props: FilterButtonsType) => {
-
     const onClickButtonAll = useCallback( () => props.changeFilter(props.id, 'all'),
         [props.changeFilter, props.id])
     const onClickButtonActive = useCallback( () => props.changeFilter(props.id, 'active'),

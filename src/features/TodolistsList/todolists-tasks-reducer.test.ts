@@ -1,7 +1,7 @@
-import {TasksStateType} from "../App";
+import {TasksStateType} from "../../trash/App";
 import {addTodolistAC, removeTodolistAC, TodolistDomainType, todolistsReducer} from "./todolistReducer";
 import {tasksReducer} from "./task-reducer";
-import {TaskPriorities, TaskStatuses} from "../api/todolist-api";
+import {TaskPriorities, TaskStatuses} from "../../api/todolist-api";
 
 
 test('id should be equals', () => {

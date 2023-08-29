@@ -1,5 +1,5 @@
 import type {Meta, StoryObj} from '@storybook/react';
-import {Task, TasksTypeProps} from "../Task";
+import {Task, TasksTypeProps} from "../features/TodolistsList/todolist/task/Task";
 import {action} from "@storybook/addon-actions";
 import React, {useState} from "react";
 import {v1} from "uuid";

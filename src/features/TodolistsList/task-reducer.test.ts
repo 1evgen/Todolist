@@ -1,9 +1,9 @@
-import {TasksStateType} from '../App'
+import {TasksStateType} from '../../trash/App'
 import {addTaskAC, removeTaskAC, tasksReducer, updateTaskAC,} from "./task-reducer";
 
 
 import {addTodolistAC, TodolistDomainType} from "./todolistReducer";
-import {TaskPriorities, TaskStatuses, UpdateTaskModelType} from "../api/todolist-api";
+import {TaskPriorities, TaskStatuses, UpdateTaskModelType} from "../../api/todolist-api";
 
 let startState: TasksStateType ;
 beforeEach(()=> {
