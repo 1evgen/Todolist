@@ -1,21 +1,15 @@
-import React, {ChangeEvent, KeyboardEvent, useCallback, useState} from "react";
+import React, {ChangeEvent, KeyboardEvent, useState} from "react";
 import {IconButton, TextField} from "@mui/material";
 import {AddCircle} from "@mui/icons-material";
 
-
-
-
 type AddItemFormType = {
     addItemForm: (title:string) => void
+    disabled?: boolean
 }
 
-
-
 export const AddItemForm = React.memo( (props: AddItemFormType) => {
-    console.log('render AddItemForm')
     const [title, setTitle] = useState('')
     const [error, setError] = useState('')
-
 
     const addTaskHandler = () => {
         if (title.trim() !== '') {
@@ -28,9 +22,7 @@ export const AddItemForm = React.memo( (props: AddItemFormType) => {
 
     const onClickEnterHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
-            addTaskHandler()
-        }
-
+            addTaskHandler()}
     };
 
     const changeTitleHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -52,9 +44,10 @@ export const AddItemForm = React.memo( (props: AddItemFormType) => {
                        onKeyUp={onClickEnterHandler}
                        error={!!error}
                        helperText={error}
+                       disabled={props.disabled}
             />
             <IconButton color={"primary"}
-                        onClick={addTaskHandler}><AddCircle/></IconButton>
+                        onClick={addTaskHandler} disabled={props.disabled}><AddCircle/></IconButton>
             {/*{error && <div className='error-message'>{error}</div>}*/}
         </div>
     )

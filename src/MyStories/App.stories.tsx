@@ -14,6 +14,5 @@ const meta: Meta<typeof App> = {
 
 
 export default meta
-
 type Story = StoryObj<typeof App>
 export const AppBaseExample: Story = {}
