@@ -10,6 +10,7 @@ export type TasksTypeProps = {
     removeTasks: (todolistId: string, id: string) => void
     id: string
     task: TaskType
+    disabled: boolean
 }
 
 export const Task = React.memo( (props: TasksTypeProps) => {
@@ -37,7 +38,9 @@ export const Task = React.memo( (props: TasksTypeProps) => {
                       onChange={onChangeTitleHandler}
         />
         <IconButton onClick={() => removeTaskHandler(props.task.id)}
-                    aria-label="delete">
+                    aria-label="delete"
+                    disabled={props.disabled}
+        >
             <Delete />
         </IconButton>
     </li>

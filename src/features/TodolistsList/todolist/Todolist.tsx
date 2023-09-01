@@ -71,6 +71,7 @@ export const Todolist = React.memo( ({demo = false,...props}: TodolistType) => {
                                                          id={props.todolist.id}
                                                          task={t}
                                                          key={t.id}
+                                                         disabled={props.todolist.entityStatus === "loading"}
                     />))}
                 </ul>
 

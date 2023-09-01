@@ -34,7 +34,9 @@ export const TaskStories_2: Story = {
         removeTasks={action('remove task')}
         id={'swdedf22d1'}
         task={{id: '2', title: 'TypeScript', status: TaskStatuses.New, todoListId:"swdedf22d1", startDate: '',
-            deadline: '',addedDate: '', order: 0, priority: TaskPriorities.Low, description: ''}}/>
+            deadline: '',addedDate: '', order: 0, priority: TaskPriorities.Low, description: ''}}
+        disabled={true}
+    />
 };
 
 export const TasksStory_3: Story = {
@@ -46,7 +48,9 @@ export const TasksStory_3: Story = {
                 removeTasks={action('remove task')}
                 id={'swdedf22d1'}
                 task={{id: '2', title: 'TypeScript', status: TaskStatuses.New, todoListId:"swdedf22d1", startDate: '',
-                    deadline: '',addedDate: '', order: 0, priority: TaskPriorities.Low, description: ''}}/>
+                    deadline: '',addedDate: '', order: 0, priority: TaskPriorities.Low, description: ''}}
+                disabled={true}
+            />
             <Task
                 changeTaskTitle={action('change story')}
                 changeTaskStatus={action('change status')}
@@ -54,7 +58,9 @@ export const TasksStory_3: Story = {
                 id={'swdedf22d2'}
                 task={{id: v1(), title: 'HTML&CSS', status: TaskStatuses.Completed, todoListId:"todolistId1", startDate: '',
                     deadline: '', addedDate: '', order: 0, priority: TaskPriorities.Low, description: '',
-                }}/>
+                }}
+                disabled={false}
+            />
         </div>
     )
 }
@@ -70,6 +76,7 @@ const  TaskWithHook: React.FC<TasksTypeProps> = (args)=> {
                      removeTasks={args.removeTasks}
                      id={args.id}
                      task={tasks}
+                     disabled={true}
         />
 }
 
@@ -85,7 +92,9 @@ export const uncontrolledTask: Story = {
                        changeTaskStatus={args.changeTaskStatus}
                        removeTasks={args.removeTasks}
                        id={args.id}
-                       task={args.task}/>
+                       task={args.task}
+                       disabled={true}
+    />
 
 }
 
