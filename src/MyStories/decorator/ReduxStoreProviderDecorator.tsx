@@ -38,7 +38,8 @@ const initialGlobalState: AppRootStateType  = {
     },
     app: {
         status: 'loading',
-        error: null
+        error: null,
+        initialized: false
     }
 };
 

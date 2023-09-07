@@ -97,3 +97,24 @@ export const todolistApi = {
         return instance.put<ResponseType<TaskType>>(`todo-lists/${todolistId}/tasks/${taskId}`, model)
     }
 }
+
+type dataLoginType = {
+    email:string
+    password: string
+    rememberMe: boolean
+    captcha?: string
+}
+
+
+export const authAPI = {
+    login(data: dataLoginType) {
+        return instance.post<ResponseType<{userId: number}>>(`/auth/login`, data)
+    },
+    authMe(){
+        return instance.get<ResponseType<{id: number, email: string, login: string}>>('/auth/me')
+    },
+    logout(){
+        return instance.delete<ResponseType>('/auth/login')
+    }
+
+}

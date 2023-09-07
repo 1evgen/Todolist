@@ -48,7 +48,9 @@ export const fetchTodolistsTC = ():AppThunk => (dispatch:Dispatch)=> {
         .then(response=>  {
             dispatch(setTodolistAC(response.data))
             dispatch(setAppStatusAC('succeeded'))
-        })
+        }).catch(error => {
+            handleServerNetworkError(dispatch, error.message)
+    })
 }
 
 export const removeTodolistTC = (todolistId: string): AppThunk => (dispatch: Dispatch)=> {
