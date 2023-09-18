@@ -6,10 +6,10 @@ import {AddItemForm} from "../Components/addItemForm/AddItemForm";
 import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@mui/material";
 import {Menu} from "@mui/icons-material";
 import {
-    addTodolistAC,
-    changeFilterAC,
-    changeTodolistTitleAC, FilterValueType,
-    removeTodolistAC,
+    addTodolist,
+    changeFilter,
+    changeTodolistTitle, FilterValueType,
+    removeTodolist,
     todolistsReducer
 } from "../features/TodolistsList/todolistReducer";
 import {addTaskAC, removeTaskAC, tasksReducer} from "../features/TodolistsList/task-reducer";
@@ -57,7 +57,7 @@ function AppWithReducers() {
     // }
     //
     // const changeFilter = (todolistID: string, titleButton: FilterValueType) => {
-    //     dispatchToTodolist(changeFilterAC(todolistID, titleButton))
+    //     dispatchToTodolist(changeFilter(todolistID, titleButton))
     // }
     //
     // const addTask = (task: taskType) => {
@@ -65,13 +65,13 @@ function AppWithReducers() {
     // }
     //
     // const removeTodolist = (TodolistID: string) => {
-    //     const action = removeTodolistAC(TodolistID)
+    //     const action = removeTodolist(TodolistID)
     //     dispatchToTodolist(action)
     //     dispatchToTasks(action)
     // }
     //
     // const addTodolist = (title: string) => {
-    //     const action = addTodolistAC(title)
+    //     const action = addTodolist(title)
     //     dispatchToTodolist(action)
     //     dispatchToTasks(action)
     // }
@@ -81,7 +81,7 @@ function AppWithReducers() {
     // }
     //
     // const changeTodolistTitle = (todolistID: string, newValue: string)=> {
-    //    dispatchToTodolist(changeTodolistTitleAC(todolistID, newValue))
+    //    dispatchToTodolist(changeTodolistTitle(todolistID, newValue))
     // }
     //
     // return (

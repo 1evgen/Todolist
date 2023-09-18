@@ -4,17 +4,17 @@ import {FilterValueType} from "../../features/TodolistsList/todolistReducer";
 
 type FilterButtonsType = {
     filter: FilterValueType
-    changeFilter: (todolistID: string, titleButton: FilterValueType) => void
+    changeTodolistFilter: (todolistID: string, titleButton: FilterValueType) => void
     id: string
 }
 
 export const FilterButtons = React.memo(  (props: FilterButtonsType) => {
-    const onClickButtonAll = useCallback( () => props.changeFilter(props.id, 'all'),
-        [props.changeFilter, props.id])
-    const onClickButtonActive = useCallback( () => props.changeFilter(props.id, 'active'),
-        [props.changeFilter,props.id])
-    const onClickButtonCompleted = useCallback( () => props.changeFilter(props.id, 'completed'),
-        [props.changeFilter, props.id])
+    const onClickButtonAll = useCallback( () => props.changeTodolistFilter(props.id, 'all'),
+        [props.changeTodolistFilter, props.id])
+    const onClickButtonActive = useCallback( () => props.changeTodolistFilter(props.id, 'active'),
+        [props.changeTodolistFilter,props.id])
+    const onClickButtonCompleted = useCallback( () => props.changeTodolistFilter(props.id, 'completed'),
+        [props.changeTodolistFilter, props.id])
 
     return (
         <div>

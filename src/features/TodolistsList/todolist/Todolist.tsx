@@ -16,7 +16,7 @@ export type TodolistType = {
     todolist: TodolistDomainType
     tasks: Array<TaskType>
     removeTasks: (todolistID: string, id: string) => void
-    changeFilter: (todolistID: string, titleButton: FilterValueType) => void
+    changeTodolistFilter: (todolistID: string, titleButton: FilterValueType) => void
     addTask: (todolistID: string, title: string) => void
     changeTaskStatus: (todolistID: string, status: TaskStatuses, id: string) => void
     removeTodolist: (todolistID: string) => void
@@ -76,7 +76,7 @@ export const Todolist = React.memo( ({demo = false,...props}: TodolistType) => {
                 </ul>
 
                 <FilterButtons filter={props.todolist.filter}
-                               changeFilter={props.changeFilter}
+                               changeTodolistFilter={props.changeTodolistFilter}
                                id={props.todolist.id}/>
             </div>
         </div>
