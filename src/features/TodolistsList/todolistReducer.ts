@@ -1,14 +1,16 @@
 
 import {todolistApi, TodolistType} from "../../api/todolist-api";
 import {Dispatch} from "redux";
-import {AppThunk} from "../../app/store";
+import {AppRootStateType, AppThunk} from "../../app/store";
 import {RequestStatusType, setAppStatus} from "../../app/app-reducer";
 import {Simulate} from "react-dom/test-utils";
 import error = Simulate.error;
 import {handleServerAppError, handleServerNetworkError} from "../../utils/errorUtilit";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {fetchTaskTC} from "./task-reducer";
 
 const initialState: Array<TodolistDomainType> = []
+
 
 export const sliceTodolists = createSlice(({
     name: 'todolists',
@@ -44,21 +46,27 @@ export const sliceTodolists = createSlice(({
             if(todo){
                 todo.entityStatus = action.payload.entityStatus
             }
+        },
+        clearTotdos (state, action: PayloadAction) {
+            state.splice(0, state.length)
         }
     }
 }))
 
 export  const  todolistsReducer = sliceTodolists.reducer
-export const {changeTodolistEntityStatus,changeTodolistTitle,changeFilter,setTodolist,addTodolist,removeTodolist} = sliceTodolists.actions
+export const {changeTodolistEntityStatus, changeTodolistTitle,changeFilter,setTodolist,addTodolist,removeTodolist,clearTotdos} = sliceTodolists.actions
 
 // thunk
-export const fetchTodolistsTC = ():AppThunk => (dispatch:Dispatch)=> {
+export const fetchTodolistsTC = ():AppThunk => (dispatch)=> {
     dispatch(setAppStatus({status:  'loading'}))
     todolistApi.getTodolist()
         .then(response=>  {
             dispatch(setTodolist({todolists: response.data}))
             dispatch(setAppStatus({status: 'succeeded'}))
-        }).catch(error => {
+            return response.data
+        }).then((todos)=> {
+            todos.forEach((tl)=>   dispatch(fetchTaskTC(tl.id)))
+    }).catch(error => {
             handleServerNetworkError(dispatch, error.message)
     })
 }

@@ -30,3 +30,16 @@ export type AppRootStateType = ReturnType<typeof rootReducer >
 export type AppDispatch = ThunkDispatch<AppRootStateType, void, AnyAction>;
 export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, AppRootStateType, unknown,  AnyAction>
 
+// Объявляем reduxStore на объекте window
+declare global {
+    interface Window {
+        store: typeof store; // Подставьте тип вашего store
+        getState: () => ReturnType<typeof store.getState>; // Добавляем getState
+    }
+}
+
+// Теперь можно присвоить store в window
+window.store = store;
+
+// Создаем функцию-обертку, чтобы получить доступ к getState из консоли браузера
+window.getState = () => window.store.getState();

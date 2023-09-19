@@ -28,12 +28,12 @@ export type TodolistType = {
 export const Todolist = React.memo( ({demo = false,...props}: TodolistType) => {
     let dispatch: AppDispatch = useDispatch()
 
-    useEffect(()=> {
-        if (!demo) {
-            return;
-        }
-        dispatch(fetchTaskTC(props.todolist.id))
-    },[])
+    // useEffect(()=> {
+    //     if (!demo) {
+    //         return;
+    //     }
+    //     dispatch(fetchTaskTC(props.todolist.id))
+    // },[])
 
     const removeTodolistHandler = useCallback( () => props.removeTodolist(props.todolist.id),
         [props.removeTodolist,props.todolist.id])

@@ -34,7 +34,6 @@ export const Login = () => {
     });
 
     if(isLogin){
-        debugger
         return  <Navigate to='/'/>
     }
     return <Grid container justifyContent={'center'}>

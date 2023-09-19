@@ -40,6 +40,11 @@ const  sliceTask = createSlice(({
                 tasks[index] = {...tasks[index], ...action.payload.model}
             }
         },
+        clearAllTasks (state, action: PayloadAction) {
+            for (let elem in state){
+                state[elem] = []
+            }
+        }
     },
     extraReducers: (builder) => {
         builder.addCase(addTodolist, (state , action)=> {
@@ -55,7 +60,7 @@ const  sliceTask = createSlice(({
 }))
 
 export const tasksReducer = sliceTask.reducer
-export const {removeTaskAC,setTaskAC,addTaskAC,updateTaskAC} = sliceTask.actions
+export const {removeTaskAC,setTaskAC,addTaskAC,updateTaskAC, clearAllTasks} = sliceTask.actions
 
 
 ///thunk

@@ -28,7 +28,7 @@ export const TodolistsList: React.FC<TodolistsListPropsType> = ({demo = false})=
         const dispatch: AppDispatch = useDispatch();
 
     useEffect(() => {
-        if (!demo) {
+        if (!demo || ! isLogin) {
             return;
         }
         dispatch(fetchTodolistsTC())

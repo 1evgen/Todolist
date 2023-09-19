@@ -3,6 +3,8 @@ import {setAppStatus} from "../../app/app-reducer";
 import {authAPI} from "../../api/todolist-api";
 import {handleServerAppError, handleServerNetworkError} from "../../utils/errorUtilit";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {clearTotdos} from "../TodolistsList/todolistReducer";
+import {clearAllTasks} from "../TodolistsList/task-reducer";
 
 export const sliceAuth = createSlice(({
     name: 'auth',
@@ -39,8 +41,11 @@ export const logoutTC = (): AppThunk => (dispatch)=> {
     dispatch(setAppStatus({status: 'loading'}))
     authAPI.logout().then(resp => {
         if(resp.data.resultCode === 0){
+            debugger
             dispatch(setIsLoggedIn({value: false}))
             dispatch(setAppStatus({status: "succeeded"}))
+            dispatch(clearTotdos())
+            dispatch(clearAllTasks())
         }else {
             handleServerAppError(dispatch,resp.data)
         }
