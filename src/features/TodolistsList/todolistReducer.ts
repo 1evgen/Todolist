@@ -17,7 +17,7 @@ export const sliceTodolists = createSlice(({
         removeTodolist (state, action: PayloadAction<{id: string}>) {
             let index = state.findIndex((tl => tl.id === action.payload.id))
             if(index !== -1){
-                state.slice(index, 1)
+                state.splice(index, 1)
             }
         },
         addTodolist (state, action: PayloadAction<{todolist: TodolistType}>) {
@@ -50,8 +50,6 @@ export const sliceTodolists = createSlice(({
 
 export  const  todolistsReducer = sliceTodolists.reducer
 export const {changeTodolistEntityStatus,changeTodolistTitle,changeFilter,setTodolist,addTodolist,removeTodolist} = sliceTodolists.actions
-
-
 
 // thunk
 export const fetchTodolistsTC = ():AppThunk => (dispatch:Dispatch)=> {

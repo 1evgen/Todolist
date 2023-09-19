@@ -22,10 +22,10 @@ type TodolistsListPropsType = {
 }
 
 export const TodolistsList: React.FC<TodolistsListPropsType> = ({demo = false})=> {
-    const todolists = useSelector<AppRootStateType, Array<TodolistDomainType>>(state => state.todolist)
-    const tasks = useSelector<AppRootStateType, TasksStateType>(state => state.tasks)
-    const isLogin = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)
-    const dispatch: AppDispatch = useDispatch();
+        const todolists = useSelector<AppRootStateType, Array<TodolistDomainType>>(state => state.todolist)
+        const tasks = useSelector<AppRootStateType, TasksStateType>(state => state.tasks)
+        const isLogin = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)
+        const dispatch: AppDispatch = useDispatch();
 
     useEffect(() => {
         if (!demo) {
@@ -51,6 +51,7 @@ export const TodolistsList: React.FC<TodolistsListPropsType> = ({demo = false})=
     }, [dispatch])
 
     const removeTodolist = useCallback((TodolistID: string) => {
+        debugger
         dispatch(removeTodolistTC(TodolistID))
     }, [dispatch])
 

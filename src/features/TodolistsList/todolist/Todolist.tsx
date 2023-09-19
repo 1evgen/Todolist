@@ -28,7 +28,6 @@ export type TodolistType = {
 export const Todolist = React.memo( ({demo = false,...props}: TodolistType) => {
     let dispatch: AppDispatch = useDispatch()
 
-
     useEffect(()=> {
         if (!demo) {
             return;
@@ -38,13 +37,10 @@ export const Todolist = React.memo( ({demo = false,...props}: TodolistType) => {
 
     const removeTodolistHandler = useCallback( () => props.removeTodolist(props.todolist.id),
         [props.removeTodolist,props.todolist.id])
-
     const addTask = useCallback( (title: string) => props.addTask(props.todolist.id, title),
         [props.addTask, props.todolist.id])
-
     const changeTodolistHandler = useCallback( (newValue: string)=> {
         props.changeTodolistTitle(props.todolist.id, newValue)},[props.changeTodolistTitle, props.todolist.id])
-
     let tasksForTodolist = props.tasks;
     if (props.todolist.filter === "active") {
         tasksForTodolist = props.tasks.filter(t => t.status === TaskStatuses.New);
@@ -74,7 +70,6 @@ export const Todolist = React.memo( ({demo = false,...props}: TodolistType) => {
                                                          disabled={props.todolist.entityStatus === "loading"}
                     />))}
                 </ul>
-
                 <FilterButtons filter={props.todolist.filter}
                                changeTodolistFilter={props.changeTodolistFilter}
                                id={props.todolist.id}/>

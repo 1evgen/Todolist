@@ -45,12 +45,10 @@ const App = React.memo(({demo = false, ...props}:AppPropsType ) => {
         dispatch(logoutTC())
     },[])
 
-
     if(!initialized){
         return <div style={{position:"fixed", top:'30%', textAlign:'center', width: '100%'}}>
             <CircularProgress /> </div>
     }
-
 
     return (
         <BrowserRouter>
@@ -74,9 +72,7 @@ const App = React.memo(({demo = false, ...props}:AppPropsType ) => {
                   <Route path='/login' element={<Login/>} />
                   <Route path='/' element={ <TodolistsList demo={demo}/>}/>
                   <Route path='*' element={<h1>404: PAGE NOT FOUND</h1>} />
-
                 </Routes>
-
             </Container>
         </div>
         </BrowserRouter>
