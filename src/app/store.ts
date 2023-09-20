@@ -6,7 +6,6 @@ import {appReducer, CommonFeatureForAppActionsType} from "./app-reducer";
 import {AuthActionsType, authReducer} from "../features/Login/auth-reducer";
 import { configureStore } from "@reduxjs/toolkit";
 
-
 export const rootReducer = combineReducers({
     tasks: tasksReducer,
     todolist: todolistsReducer,
@@ -15,18 +14,12 @@ export const rootReducer = combineReducers({
 })
 
 // export const store =  legacy_createStore(rootReducer, applyMiddleware(thunk))
-
 export const store = configureStore({
     reducer: rootReducer,
     middleware: [thunk]
 })
 
 export type AppRootStateType = ReturnType<typeof rootReducer >
-// type AppActionsType = TodolistActionType
-//     | TasksActionType
-//     | CommonFeatureForAppActionsType
-//     | AuthActionsType
-
 export type AppDispatch = ThunkDispatch<AppRootStateType, void, AnyAction>;
 export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, AppRootStateType, unknown,  AnyAction>
 
@@ -37,9 +30,13 @@ declare global {
         getState: () => ReturnType<typeof store.getState>; // Добавляем getState
     }
 }
-
 // Теперь можно присвоить store в window
 window.store = store;
-
 // Создаем функцию-обертку, чтобы получить доступ к getState из консоли браузера
 window.getState = () => window.store.getState();
+
+
+// type AppActionsType = TodolistActionType
+//     | TasksActionType
+//     | CommonFeatureForAppActionsType
+//     | AuthActionsType

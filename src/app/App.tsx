@@ -20,21 +20,22 @@ import {ErrorSnackbar} from "../Components/ErrorSnackbar/ErrorSnackbar";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {Login} from "../features/Login/Login";
 import {logoutTC} from "../features/Login/auth-reducer";
+import {selectedIsLogin, selectInitialized, selectStatus} from "./app-selectors/appSelectors";
 
 
 export type TasksStateType = {
     [key: string]: Array<TaskType>
 }
-
 type AppPropsType = {
     demo: boolean
 }
 
 const App = React.memo(({demo = false, ...props}:AppPropsType ) => {
     const dispatch: AppDispatch = useDispatch();
-    let status = useSelector<AppRootStateType, RequestStatusType>(state => state.app.status)
-    let initialized = useSelector<AppRootStateType>(state => state.app.initialized)
-    const isLogin = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)
+
+    let status = useSelector(selectStatus)
+    let initialized = useSelector(selectInitialized)
+    const isLogin = useSelector(selectedIsLogin)
 
 
     useEffect(()=>{

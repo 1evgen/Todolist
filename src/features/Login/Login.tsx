@@ -14,11 +14,12 @@ import {useDispatch, useSelector} from "react-redux";
 import {AppDispatch, AppRootStateType} from "../../app/store";
 import {loginTC} from "./auth-reducer";
 import {Navigate} from "react-router-dom";
+import {selectedIsLogin} from "../../app/app-selectors/appSelectors";
 
 
 export const Login = () => {
     const dispatch: AppDispatch = useDispatch()
-    const isLogin = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)
+    const isLogin = useSelector(selectedIsLogin)
 
     const formik = useFormik({
         initialValues: {
