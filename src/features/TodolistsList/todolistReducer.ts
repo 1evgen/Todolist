@@ -4,7 +4,7 @@ import {AppThunk} from "app/store";
 import {RequestStatusType, setAppStatus} from "app/app-reducer";
 import {handleServerAppError, handleServerNetworkError} from "utils/errorUtilit";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {fetchTaskTC} from "./task-reducer";
+import {fetchTasks} from "features/TodolistsList/task-reducer";
 
 const initialState: Array<TodolistDomainType> = [];
 
@@ -72,7 +72,7 @@ export const fetchTodolistsTC = (): AppThunk => (dispatch) => {
             return response.data;
         })
         .then((todos) => {
-            todos.forEach((tl) => dispatch(fetchTaskTC(tl.id)));
+            todos.forEach((tl) => dispatch(fetchTasks(tl.id)));
         })
         .catch((error) => {
             handleServerNetworkError(dispatch, error.message);
