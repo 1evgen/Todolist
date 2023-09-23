@@ -1,55 +1,54 @@
 //app-reducer.tsx
-import {authAPI} from "../api/todolist-api";
-import {AppThunk} from "./store";
-import {setIsLoggedIn} from "../features/Login/auth-reducer";
+import { authAPI } from "../api/todolist-api";
+import { AppThunk } from "./store";
+import { setIsLoggedIn } from "../features/Login/auth-reducer";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState = {
-    status: 'idle' as RequestStatusType,
-    error: null as string | null,
-    initialized: false
-}
+  status: "idle" as RequestStatusType,
+  error: null as string | null,
+  initialized: false,
+};
 
 export const slice = createSlice({
-    name: 'app',
-    initialState: initialState,
-    reducers: {
-        setAppStatus: (state, action: PayloadAction<{status: RequestStatusType}>) => {
-                state.status = action.payload.status
-        },
-        setAppError: (state, action: PayloadAction<{error: string | null}>)=>  {
-                state.error = action.payload.error
-        },
-        setInitialized: (state, action: PayloadAction<{ value: boolean }>)=> {
-                state.initialized = action.payload.value
-        }
-    }
-})
-export const {setAppStatus, setAppError, setInitialized} = slice.actions
-export const appReducer = slice.reducer
-export  const  appActions = slice.actions
+  name: "app",
+  initialState: initialState,
+  reducers: {
+    setAppStatus: (state, action: PayloadAction<{ status: RequestStatusType }>) => {
+      state.status = action.payload.status;
+    },
+    setAppError: (state, action: PayloadAction<{ error: string | null }>) => {
+      state.error = action.payload.error;
+    },
+    setInitialized: (state, action: PayloadAction<{ value: boolean }>) => {
+      state.initialized = action.payload.value;
+    },
+  },
+});
+export const { setAppStatus, setAppError, setInitialized } = slice.actions;
+export const appReducer = slice.reducer;
+export const appActions = slice.actions;
 
 export const initializeAppTC = (): AppThunk => (dispatch) => {
-    authAPI.authMe().then(res => {
-        if (res.data.resultCode === 0) {
-            dispatch(setIsLoggedIn({value: true}));
-        } else {
-        }
-        dispatch(setInitialized({value: true}))
-    })
-}
+  authAPI.authMe().then((res) => {
+    if (res.data.resultCode === 0) {
+      dispatch(setIsLoggedIn({ value: true }));
+    } else {
+    }
+    dispatch(setInitialized({ value: true }));
+  });
+};
 
-export type CommonFeatureForAppActionsType = ReturnType<typeof setAppStatus>
-    | ReturnType<typeof setAppError> | ReturnType<typeof setInitialized>
-export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
-export  type InitialStateType = {
-    status: RequestStatusType
-    error: string | null
-    initialized: boolean
-}
-
-
-
+export type CommonFeatureForAppActionsType =
+  | ReturnType<typeof setAppStatus>
+  | ReturnType<typeof setAppError>
+  | ReturnType<typeof setInitialized>;
+export type RequestStatusType = "idle" | "loading" | "succeeded" | "failed";
+export type InitialStateType = {
+  status: RequestStatusType;
+  error: string | null;
+  initialized: boolean;
+};
 
 /// React-redux
 // export const appReducer = (state: InitialStateType = initialState, action: CommonFeatureForAppActionsType): InitialStateType => {
