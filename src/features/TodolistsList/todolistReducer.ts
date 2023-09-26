@@ -1,6 +1,6 @@
 import {todolistApi, TodolistType} from "api/todolist-api";
 import {Dispatch} from "redux";
-import {AppThunk} from "app/store";
+import {AppDispatch, AppThunk} from "app/store";
 import {RequestStatusType, setAppStatus} from "app/app-reducer";
 import {handleServerAppError, handleServerNetworkError} from "utils/errorUtilit";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
@@ -62,7 +62,7 @@ export const {
 } = sliceTodolists.actions;
 
 // thunk
-export const fetchTodolistsTC = (): AppThunk => (dispatch) => {
+export const fetchTodolistsTC = (): AppThunk => (dispatch: any) => {
     dispatch(setAppStatus({status: "loading"}));
     todolistApi
         .getTodolist()

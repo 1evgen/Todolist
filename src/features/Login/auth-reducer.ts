@@ -1,7 +1,7 @@
-import { AppThunk } from "../../app/store";
-import { setAppStatus } from "../../app/app-reducer";
-import { authAPI } from "../../api/todolist-api";
-import { handleServerAppError, handleServerNetworkError } from "../../utils/errorUtilit";
+import { AppThunk } from "app/store";
+import { setAppStatus } from "app/app-reducer";
+import { authAPI } from "api/todolist-api";
+import { handleServerAppError, handleServerNetworkError } from "utils/errorUtilit";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { clearTotdos } from "../TodolistsList/todolistReducer";
 import { clearAllTasks } from "../TodolistsList/task-reducer";
@@ -72,14 +72,3 @@ type DataFormType = {
   password: string;
   rememberMe: boolean;
 };
-
-// react-redux
-// export const authReducer = (state = initialState, action: AuthActionsType): InitialStateType=> {
-//         switch (action.type){
-//             case "AUTH/SET-IS-LOGGED-IN":
-//                 return {...state, isLoggedIn: action.value}
-//             default: return state
-//         }
-// }
-//
-// export const setIsLoggedIn = (value: boolean)=> ({type: 'AUTH/SET-IS-LOGGED-IN', value} as const)

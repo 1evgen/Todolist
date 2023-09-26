@@ -1,7 +1,7 @@
 //app-reducer.tsx
-import { authAPI } from "../api/todolist-api";
+import { authAPI } from "api/todolist-api";
 import { AppThunk } from "./store";
-import { setIsLoggedIn } from "../features/Login/auth-reducer";
+import { setIsLoggedIn } from "features/Login/auth-reducer";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState = {

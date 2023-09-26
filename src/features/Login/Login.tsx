@@ -10,7 +10,7 @@ import Button from "@mui/material/Button";
 import { useFormik } from "formik";
 import { validate } from "utils/validateFormLogin";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, AppRootStateType } from "app/store";
+import { AppDispatch } from "app/store";
 import { loginTC } from "./auth-reducer";
 import { Navigate } from "react-router-dom";
 import { selectedIsLogin } from "app/app-selectors/appSelectors";

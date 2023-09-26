@@ -11,15 +11,15 @@ import {
   Typography,
 } from "@mui/material";
 import { Menu } from "@mui/icons-material";
-import { TaskType } from "../api/todolist-api";
-import { TodolistsList } from "../features/TodolistsList/TodolistsList";
+import { TaskType } from "api/todolist-api";
+import { TodolistsList } from "features/TodolistsList/TodolistsList";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, AppRootStateType } from "./store";
-import { initializeAppTC, RequestStatusType } from "./app-reducer";
-import { ErrorSnackbar } from "../Components/ErrorSnackbar/ErrorSnackbar";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Login } from "../features/Login/Login";
-import { logoutTC } from "../features/Login/auth-reducer";
+import { AppDispatch } from "./store";
+import { initializeAppTC } from "./app-reducer";
+import { ErrorSnackbar } from "Components/ErrorSnackbar/ErrorSnackbar";
+import {Route, Routes } from "react-router-dom";
+import { Login } from "features/Login/Login";
+import { logoutTC } from "features/Login/auth-reducer";
 import { selectedIsLogin, selectInitialized, selectStatus } from "./app-selectors/appSelectors";
 
 export type TasksStateType = {
@@ -52,7 +52,7 @@ const App = React.memo(({ demo = false, ...props }: AppPropsType) => {
   }
 
   return (
-    <BrowserRouter>
+
       <div className="App">
         <ErrorSnackbar />
         <AppBar position={"static"}>
@@ -72,13 +72,14 @@ const App = React.memo(({ demo = false, ...props }: AppPropsType) => {
         {status === "loading" && <LinearProgress />}
         <Container fixed>
           <Routes>
+
             <Route path="/login" element={<Login />} />
             <Route path="/" element={<TodolistsList demo={demo} />} />
             <Route path="*" element={<h1>404: PAGE NOT FOUND</h1>} />
           </Routes>
         </Container>
       </div>
-    </BrowserRouter>
+
   );
 });
 export default App;
