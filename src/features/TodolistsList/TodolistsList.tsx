@@ -34,7 +34,7 @@ export const TodolistsList: React.FC<TodolistsListPropsType> = ({ demo = false }
   }, []);
   const changeTaskStatus = useCallback(
     (todolistID: string, status: TaskStatuses, id: string) => {
-      dispatch(updateTaskTC(todolistID, id, { status }));
+      dispatch(updateTaskTC({todolistId: todolistID,taskId: id,domainModel:{ status }}));
     },
     [dispatch],
   );
@@ -55,7 +55,7 @@ export const TodolistsList: React.FC<TodolistsListPropsType> = ({ demo = false }
 
   const addTask = useCallback(
     (todolistID: string, title: string) => {
-      dispatch(addTaskTC(todolistID, title));
+      dispatch(addTaskTC({todolistId: todolistID, title}));
     },
     [dispatch],
   );
@@ -78,7 +78,7 @@ export const TodolistsList: React.FC<TodolistsListPropsType> = ({ demo = false }
 
   const changeTaskTitle = useCallback(
     (id: string, newValue: string, todolistID: string) => {
-      dispatch(updateTaskTC(todolistID, id, { title: newValue }));
+      dispatch(updateTaskTC( {todolistId: todolistID, taskId: id, domainModel: { title: newValue }}));
     },
     [dispatch],
   );
