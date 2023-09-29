@@ -40,7 +40,7 @@ const App = React.memo(({ demo = false, ...props }: AppPropsType) => {
   }, []);
 
   const logoutHandler = useCallback(() => {
-    dispatch(logoutTC());
+    dispatch(logoutTC(false));
   }, []);
 
   if (!initialized) {

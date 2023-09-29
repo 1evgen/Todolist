@@ -5,6 +5,7 @@ import thunk, { ThunkAction, ThunkDispatch } from "redux-thunk";
 import { appReducer} from "./app-reducer";
 import {authReducer } from "features/Login/auth-reducer";
 import { configureStore } from "@reduxjs/toolkit";
+import {useDispatch} from "react-redux";
 
 export const rootReducer = combineReducers({
   tasks: tasksReducer,
@@ -21,9 +22,9 @@ export const store = configureStore({
 
 export type AppRootStateType = ReturnType<RootReducerType>;
 export type AppDispatch = ThunkDispatch<AppRootStateType, void, AnyAction>;
-// export type AppDispatch = typeof store.dispatch
+export type AppDispatchAdditional = typeof store.dispatch
 export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, AppRootStateType, unknown, AnyAction>;
-
+export const useAppDispatch = () =>  useDispatch<AppDispatchAdditional>()
 
 //
 // type AppActionsType = TodolistActionType

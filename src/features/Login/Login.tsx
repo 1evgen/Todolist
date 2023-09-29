@@ -26,9 +26,11 @@ export const Login = () => {
       rememberMe: false,
     },
     validate,
-    onSubmit: (values) => {
-      dispatch(loginTC(values));
-      //  alert(JSON.stringify(values, null, 2));
+    onSubmit: async (values,formikHelpers) => {
+      let result = await dispatch(loginTC(values));
+      if(result.type === loginTC.rejected.type){}
+      formikHelpers.setFieldError('errors', 'fakeError')
+
     },
   });
 
