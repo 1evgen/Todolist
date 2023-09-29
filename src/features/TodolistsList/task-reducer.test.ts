@@ -1,6 +1,6 @@
 import { TasksStateType } from "trash/App";
 import {addTaskTC, removeTaskTC, tasksReducer, updateTaskTC} from "./task-reducer";
-import { addTodolist, TodolistDomainType } from "./todolistReducer";
+import {addTodolistTC, TodolistDomainType} from "./todolistReducer";
 import { TaskPriorities, TaskStatuses, UpdateTaskModelType } from "api/todolist-api";
 
 let startState: TasksStateType;
@@ -206,7 +206,7 @@ test("new array should be added when new todolist is added", () => {
     order: 0,
     entityStatus: "idle",
   };
-  const action = addTodolist({ todolist: newTodolist });
+  const action = addTodolistTC.fulfilled({ todolist: newTodolist}, 'requestId', 'hello');
   const endState = tasksReducer(startState, action);
   const keys = Object.keys(endState);
 

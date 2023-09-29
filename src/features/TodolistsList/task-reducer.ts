@@ -1,17 +1,11 @@
 import {TasksStateType} from "trash/App";
-import {
-    addTodolist,
-    changeTodolistEntityStatus,
-    removeTodolist,
-    setTodolist,
-} from "./todolistReducer";
+import {addTodolistTC, changeTodolistEntityStatus, fetchTodolistsTC, removeTodolistTC} from "./todolistReducer";
 import {TaskPriorities, TaskStatuses, todolistApi, UpdateTaskModelType} from "api/todolist-api";
 import {setAppStatus} from "app/app-reducer";
 import {handleServerAppError, handleServerNetworkError} from "utils/errorUtilit";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import axios from "axios";
 import {createAppAsyncThunk} from "utils/create-app-asynk";
-
 
 // Reducer
 const initialState: TasksStateType = {};
@@ -127,14 +121,16 @@ const sliceTask = createSlice({
         },
     extraReducers: (builder) => {
         builder
-            .addCase(addTodolist, (state, action) => {
-                state[action.payload.todolist.id] = []
+            .addCase(addTodolistTC.fulfilled, (state, action) => {
+                if(action.payload){state[action.payload.todolist.id] = []}
             })
-            .addCase(removeTodolist, (state, action) => {
-                delete state[action.payload.id]
+            .addCase(removeTodolistTC.fulfilled, (state, action) => {
+                delete state[ action.payload.todolistId]
             })
-            .addCase(setTodolist, (state, action) => {
-                action.payload.todolists.forEach((tl) => (state[tl.id] = []))
+            .addCase(fetchTodolistsTC.fulfilled, (state, action) => {
+                if(action.payload){
+                    action.payload.todolist.forEach((tl) => (state[tl.id] = []))
+                }
             })
             .addCase(fetchTasks.fulfilled, (state, action) => {
                 if (action.payload) {
@@ -157,10 +153,7 @@ const sliceTask = createSlice({
                     const tasks = state[action.payload.todolistId];
                     const index = tasks.findIndex((t) => t.id === action.payload.taskId);
                     if (index !== -1) {
-                        tasks[index] = {...tasks[index], ...action.payload.model};
-                    }
-                }
-            })
+                        tasks[index] = {...tasks[index], ...action.payload.model};}}})
     },
 })
 export const tasksReducer = sliceTask.reducer;
@@ -173,7 +166,6 @@ export type UpdateDomainTaskModelType = {
     startDate?: string;
     deadline?: string;
 };
-
 
 // export const addTaskTC_ =
 //     (todolistId: string, title: string): AppThunk =>

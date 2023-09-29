@@ -1,20 +1,17 @@
 import React, { useReducer, useState } from "react";
 import "../app/App.css";
-import { Todolist } from "../features/TodolistsList/todolist/Todolist";
+import { Todolist } from "features/TodolistsList/todolist/Todolist";
 import { v1 } from "uuid";
-import { AddItemForm } from "../Components/addItemForm/AddItemForm";
+import { AddItemForm } from "Components/addItemForm/AddItemForm";
 import { AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography } from "@mui/material";
 import { Menu } from "@mui/icons-material";
 import {
-  addTodolist,
   changeFilter,
-  changeTodolistTitle,
   FilterValueType,
-  removeTodolist,
   todolistsReducer,
-} from "../features/TodolistsList/todolistReducer";
-import {tasksReducer } from "../features/TodolistsList/task-reducer";
-import { TaskPriorities, TaskStatuses, TaskType } from "../api/todolist-api";
+} from "features/TodolistsList/todolistReducer";
+import {tasksReducer } from "features/TodolistsList/task-reducer";
+import { TaskPriorities, TaskStatuses, TaskType } from "api/todolist-api";
 
 export type TasksStateType = {
   [key: string]: Array<TaskType>;
