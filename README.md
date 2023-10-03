@@ -1,3 +1,8 @@
+_"Let's fly to space, to employment!"_ 
+ <br>-_Elon Musk_- </br>
+
+<img src="IlonM.png" alt="Steve" width="120" height="80">
+ 
 # ToDo List Project
 
 The ToDo List project is an interactive web application designed for organizing and managing your task list. With this application, you can easily add, edit, delete tasks, and mark them as completed. The project is built on the architectural template of React Redux Toolkit and interacts with external data using REST API.
@@ -9,8 +14,8 @@ A significant part of the development process focused on adhering to code format
 The project's goal was to learn architectural principles, interact with a server, master the art of testing applications, and create a easily scalable application.
 
 <p align="left"> <a href="https://www.w3schools.com/css/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original-wordmark.svg" alt="css3" width="40" height="40"/> </a></a> <a href="https://jestjs.io" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/jestjsio/jestjsio-icon.svg" alt="jest" width="40" height="40"/> </a> <a href="https://reactjs.org/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg" alt="react" width="40" height="40"/> </a> <a href="https://redux.js.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/redux/redux-original.svg" alt="redux" width="40" height="40"/> </a> <a href="https://www.typescriptlang.org/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg" alt="typescript" width="40" height="40"/> </a> 
-<a href="https://storybook.js.org/" target="_blank" rel="noreferrer">  <img src= "https://cdn.jsdelivr.net/gh/storybookjs/brand@main/badge/badge-storybook.svg" alt="storybook",  width="100" height="40"/> </a>
-<a href="https://https://mui.com/" target="_blank" rel="noreferrer">  <img src= "file:///C:/Users/polin/Desktop/react-router.svg" alt="storybook",  width="100" height="40"/>
+<a href="https://storybook.js.org/" target="_blank" rel="noreferrer">  <img src= "https://cdn.jsdelivr.net/gh/storybookjs/brand@main/badge/badge-storybook.svg" alt="storybook",  width="100" height="40"/> </a><a href="https://https://mui.com/" target="_blank" rel="noreferrer"><img src= "material-ui.svg" alt="material",  width="80" height="40"/>
+  
 </p>
 
 ## Technology Stack
