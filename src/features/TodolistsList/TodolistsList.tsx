@@ -25,13 +25,17 @@ export const TodolistsList: React.FC<TodolistsListPropsType> = ({ demo = false }
   const tasks = useSelector(selectTasks);
   const isLogin = useSelector(selectedIsLogin);
   const dispatch: AppDispatch = useDispatch();
+    console.log(2)
 
   useEffect(() => {
+      console.log(4)
     if (!demo || !isLogin) {
       return;
     }
     dispatch(fetchTodolistsTC());
   }, []);
+
+
   const changeTaskStatus = useCallback(
     (todolistID: string, status: TaskStatuses, id: string) => {
       dispatch(updateTaskTC({todolistId: todolistID,taskId: id,domainModel:{ status }}));

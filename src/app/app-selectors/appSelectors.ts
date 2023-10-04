@@ -1,6 +1,6 @@
 import { AppRootStateType } from "../store";
 import { useSelector } from "react-redux";
-import { TodolistDomainType } from "../../features/TodolistsList/todolistReducer";
+import { TodolistDomainType } from "features/TodolistsList/todolistReducer";
 import { TasksStateType } from "../App";
 
 export const selectStatus = (state: AppRootStateType) => state.app.status;

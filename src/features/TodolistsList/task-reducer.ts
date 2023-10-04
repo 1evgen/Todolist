@@ -16,11 +16,8 @@ export const fetchTasks = createAppAsyncThunk('tasks/fetchTask', async (todolist
         thunkAPI.dispatch(setAppStatus({status: 'succeeded'}))
         return {tasks: res.data.items, todolistId}
     } catch (error) {
-        if (axios.isAxiosError(error)) {
-            handleServerNetworkError(thunkAPI.dispatch, error.message);
-        } else {
-            throw Error('Some Error !')
-        }
+        handleServerNetworkError(error, thunkAPI.dispatch)
+        return  thunkAPI.rejectWithValue("Some Error")
     }
 })
 
@@ -38,12 +35,8 @@ export const removeTaskTC = createAppAsyncThunk('tasks/removeTask',
                 return thunkAPI.rejectWithValue(null)
             }
         } catch (error) {
-            if (axios.isAxiosError(error)) {
-                handleServerNetworkError(thunkAPI.dispatch, error.message);
-                return thunkAPI.rejectWithValue(null)
-            } else {
-                throw Error('Some Error !')
-            }
+            handleServerNetworkError(error, thunkAPI.dispatch)
+            return  thunkAPI.rejectWithValue("Some Error")
         } finally {
             thunkAPI.dispatch(changeTodolistEntityStatus({id: arg.todolistId, entityStatus: "idle"}));
         }
@@ -63,12 +56,8 @@ export const addTaskTC = createAppAsyncThunk('tasks/addTask',
                 return thunkAPI.rejectWithValue(null)
             }
         } catch (error) {
-            if (axios.isAxiosError(error)) {
-                handleServerNetworkError(thunkAPI.dispatch, error.message);
-                return thunkAPI.rejectWithValue(null)
-            } else {
-                throw Error('Error is occurred')
-            }
+            handleServerNetworkError(error, thunkAPI.dispatch)
+            return  thunkAPI.rejectWithValue("Some Error")
         }
     })
 
@@ -76,7 +65,7 @@ export const updateTaskTC = createAppAsyncThunk('tasks/updateTask',
     async (arg:{todolistId: string, taskId: string, domainModel: UpdateDomainTaskModelType}, thunkAPI) => {
         const state = thunkAPI.getState().tasks[arg.todolistId].find((el)=> el.id === arg.taskId)
         if (!state) {
-            return  thunkAPI.rejectWithValue(null)
+            return  thunkAPI.rejectWithValue('State is not found')
         }
         const model: UpdateTaskModelType = {
             title: state.title,
@@ -98,12 +87,8 @@ export const updateTaskTC = createAppAsyncThunk('tasks/updateTask',
                 return  thunkAPI.rejectWithValue(null)
             }
         } catch (error){
-            if(axios.isAxiosError(error)){
-                handleServerNetworkError(thunkAPI.dispatch, error.message)
-                return  thunkAPI.rejectWithValue(null)
-            } else {
-                throw Error('some error is occurred !')
-            }
+            handleServerNetworkError(error, thunkAPI.dispatch)
+            return  thunkAPI.rejectWithValue("Some Error")
         }
 })
 

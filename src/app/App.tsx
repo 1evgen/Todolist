@@ -35,6 +35,7 @@ const App = React.memo(({ demo = false, ...props }: AppPropsType) => {
   let initialized = useSelector(selectInitialized);
   const isLogin = useSelector(selectedIsLogin);
 
+
   useEffect(() => {
     dispatch(initializeAppTC());
   }, []);
@@ -45,10 +46,10 @@ const App = React.memo(({ demo = false, ...props }: AppPropsType) => {
 
   if (!initialized) {
     return (
-      <div style={{ position: "fixed", top: "30%", textAlign: "center", width: "100%" }}>
-        <CircularProgress />{" "}
-      </div>
-    );
+        <div style={{ position: "fixed", top: "30%", textAlign: "center", width: "100%" }}>
+          <CircularProgress />{" "}
+        </div>
+    )
   }
 
   return (
@@ -72,7 +73,6 @@ const App = React.memo(({ demo = false, ...props }: AppPropsType) => {
         {status === "loading" && <LinearProgress />}
         <Container fixed>
           <Routes>
-
             <Route path="/login" element={<Login />} />
             <Route path="/" element={<TodolistsList demo={demo} />} />
             <Route path="*" element={<h1>404: PAGE NOT FOUND</h1>} />

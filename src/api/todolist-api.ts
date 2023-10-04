@@ -24,6 +24,7 @@ export type ResponseType<D = {}> = {
   messages: Array<string>;
   fieldsErrors: Array<{ field: string, error: string }>;
   data: D;
+
 };
 
 export enum TaskStatuses {
@@ -114,3 +115,9 @@ export const authAPI = {
     return instance.delete<ResponseType>("/auth/login");
   },
 };
+
+/**
+ let example = 1 -
+ example++;
+ console.log(example)
+ */

@@ -6,9 +6,8 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {clearTotdos} from "../TodolistsList/todolistReducer";
 import {clearAllTasks} from "../TodolistsList/task-reducer";
 import {createAppAsyncThunk} from "utils/create-app-asynk";
-import axios from "axios";
-import {Simulate} from "react-dom/test-utils";
-import error = Simulate.error;
+
+
 
 export const loginTC = createAppAsyncThunk('auth/login', async (data: DataFormType, thunkAPI) => {
     try {
@@ -19,13 +18,11 @@ export const loginTC = createAppAsyncThunk('auth/login', async (data: DataFormTy
             return {isLogged: true}
         } else {
             handleServerAppError(thunkAPI.dispatch, response.data);
-            return thunkAPI.rejectWithValue({errorMessage: response.data.messages, field: response.data.fieldsErrors[0].field})
+            return thunkAPI.rejectWithValue(response.data)
         }
     } catch (error) {
-        if (axios.isAxiosError(error)) {
-            handleServerNetworkError(thunkAPI.dispatch, error.message);
-            return thunkAPI.rejectWithValue(error.message)
-        }
+        handleServerNetworkError(error, thunkAPI.dispatch)
+        return  thunkAPI.rejectWithValue("Some Error")
     } finally {
         thunkAPI.dispatch(setAppStatus({status: "idle"}));
     }
@@ -42,15 +39,12 @@ export const logoutTC =createAppAsyncThunk('logout/login',async (isLoggedOut: bo
                 return {isLogged: false}
         }else {
             handleServerAppError(thunkAPI.dispatch, response.data);
-            return thunkAPI.rejectWithValue(response.data.messages[0])
+            return thunkAPI.rejectWithValue(response.data)
+
         }
     } catch (error){
-        if(axios.isAxiosError(error)){
-            handleServerNetworkError(thunkAPI.dispatch, error.message);
-            return thunkAPI.rejectWithValue(error.message)
-        } else {
-            return thunkAPI.rejectWithValue('Some Errors')
-        }
+        handleServerNetworkError(error, thunkAPI.dispatch)
+        return  thunkAPI.rejectWithValue(null)
     }
 })
 
@@ -82,7 +76,7 @@ export const {setIsLoggedIn} = sliceAuth.actions;
 export const AuthActions = sliceAuth.actions;
 
 //type
-export type AuthActionsType = ReturnType<typeof setIsLoggedIn>;
+
 type DataFormType = {
     email: string;
     password: string;
@@ -110,7 +104,6 @@ type DataFormType = {
 //                     dispatch(setAppStatus({status: "idle"}));
 //                 });
 //         };
-
 // export const logoutTC_ = (): AppThunk => (dispatch) => {
 //     dispatch(setAppStatus({status: "loading"}));
 //     authAPI

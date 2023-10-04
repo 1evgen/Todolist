@@ -15,11 +15,7 @@ export const fetchTodolistsTC = createAppAsyncThunk('todolist/fetchTodo', async 
         response.data.forEach(tl => thunkAPI.dispatch(fetchTasks(tl.id)))
         return {todolist: response.data}
     } catch (error) {
-        if (axios.isAxiosError(error)) {
-            handleServerNetworkError(thunkAPI.dispatch, error.message);
-        } else {
-            throw Error('is error')
-        }
+        handleServerNetworkError(error, thunkAPI.dispatch)
     }
 })
 
@@ -36,12 +32,8 @@ export const removeTodolistTC = createAppAsyncThunk('todolist/removeTodolist', a
             return thunkAPI.rejectWithValue(null)
         }
     } catch (error) {
-        if (axios.isAxiosError(error)) {
-            handleServerNetworkError(thunkAPI.dispatch, error.message);
-            return thunkAPI.rejectWithValue(null)
-        } else {
-            throw Error('is Error!')
-        }
+        handleServerNetworkError(error, thunkAPI.dispatch)
+        return  thunkAPI.rejectWithValue("Some Error")
     } finally {
         thunkAPI.dispatch(changeTodolistEntityStatus({id: todolistId, entityStatus: "idle"}));
     }
@@ -59,10 +51,8 @@ export const addTodolistTC = createAppAsyncThunk('todolist/addTodolist', async (
             return thunkAPI.rejectWithValue(null)
         }
     } catch (error) {
-        if (axios.isAxiosError(error)) {
-            handleServerNetworkError(thunkAPI.dispatch, error.message);
-            return thunkAPI.rejectWithValue(null)
-        }
+        handleServerNetworkError(error, thunkAPI.dispatch)
+        return  thunkAPI.rejectWithValue("Some Error")
     }
 })
 
@@ -79,9 +69,9 @@ export const changeTodolistTC = createAppAsyncThunk('todolist/changeTodo',
                 return thunkAPI.rejectWithValue(null)
             }
         } catch (error) {
-            if (axios.isAxiosError(error)) {
-                handleServerNetworkError(thunkAPI.dispatch, error.message);
-                return thunkAPI.rejectWithValue(null)}}
+            handleServerNetworkError(error, thunkAPI.dispatch)
+            return  thunkAPI.rejectWithValue("Some Error")
+        }
     })
 
 export const sliceTodolists = createSlice({

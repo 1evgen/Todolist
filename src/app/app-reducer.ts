@@ -1,9 +1,9 @@
 //app-reducer.tsx
 import { authAPI } from "api/todolist-api";
-import { AppThunk } from "./store";
 import { setIsLoggedIn } from "features/Login/auth-reducer";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {createAppAsyncThunk} from "utils/create-app-asynk";
+import {handleServerAppError, handleServerNetworkError} from "utils/errorUtilit";
 
 const initialState = {
   status: "idle" as RequestStatusType,
@@ -12,9 +12,16 @@ const initialState = {
 };
 
 export const initializeAppTC = createAppAsyncThunk('app/initialized',async (arg, thunkAPI) => {
-  let response = await authAPI.authMe()
-  thunkAPI.dispatch(setIsLoggedIn({value: true}))
-  return
+  try{
+    let response = await authAPI.authMe()
+    console.log(`answer is ${response.data.resultCode}`, 7)
+    if(response.data.resultCode === 0){
+      thunkAPI.dispatch(setIsLoggedIn({value: true}))
+      return
+    }
+  } catch (error){
+    handleServerNetworkError(error, thunkAPI.dispatch)
+  }
 })
 
 export const slice = createSlice({
@@ -27,10 +34,8 @@ export const slice = createSlice({
     setAppError: (state, action: PayloadAction<{ error: string | null }>) => {
       state.error = action.payload.error;
     },
-    // setInitialized: (state, action: PayloadAction<{ value: boolean }>) => {
-    //   state.initialized = action.payload.value;
-    // },
   },
+
   extraReducers: builder => {
     builder.addCase(initializeAppTC.fulfilled, (state, action) => {
       state.initialized = true
@@ -42,6 +47,13 @@ export const appReducer = slice.reducer;
 export const appActions = slice.actions;
 
 
+export type RequestStatusType = "idle" | "loading" | "succeeded" | "failed";
+export type InitialStateType = {
+  status: RequestStatusType;
+  error: string | null;
+  initialized: boolean;
+};
+
 
 // export const initializeAppTC_ = (): AppThunk => (dispatch) => {
 //   authAPI.authMe().then((res) => {
@@ -51,14 +63,3 @@ export const appActions = slice.actions;
 //     dispatch(setInitialized({ value: true }));
 //   });
 // };
-
-export type CommonFeatureForAppActionsType =
-  | ReturnType<typeof setAppStatus>
-  | ReturnType<typeof setAppError>
-
-export type RequestStatusType = "idle" | "loading" | "succeeded" | "failed";
-export type InitialStateType = {
-  status: RequestStatusType;
-  error: string | null;
-  initialized: boolean;
-};
