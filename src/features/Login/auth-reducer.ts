@@ -8,7 +8,6 @@ import {clearAllTasks} from "../TodolistsList/task-reducer";
 import {createAppAsyncThunk} from "utils/create-app-asynk";
 
 
-
 export const loginTC = createAppAsyncThunk('auth/login', async (data: DataFormType, thunkAPI) => {
     try {
         thunkAPI.dispatch(setAppStatus({status: "loading"}));
@@ -40,7 +39,6 @@ export const logoutTC =createAppAsyncThunk('logout/login',async (isLoggedOut: bo
         }else {
             handleServerAppError(thunkAPI.dispatch, response.data);
             return thunkAPI.rejectWithValue(response.data)
-
         }
     } catch (error){
         handleServerNetworkError(error, thunkAPI.dispatch)

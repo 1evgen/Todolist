@@ -13,8 +13,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "app/store";
 import { loginTC } from "./auth-reducer";
 import { Navigate } from "react-router-dom";
-import { selectedIsLogin } from "app/app-selectors/appSelectors";
-import { ResponseType } from 'api/todolist-api'
+import { selectedIsLogin } from "app/appSelectors";
+
 
 export type FormValues = {
   email: string,

@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 import { Button } from "@mui/material";
-import { FilterValueType } from "../../features/TodolistsList/todolistReducer";
+import { FilterValueType } from "features/TodolistsList/todolistReducer";
 
 type FilterButtonsType = {
   filter: FilterValueType;

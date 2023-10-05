@@ -1,7 +1,9 @@
 import { TasksStateType } from "trash/App";
-import {addTaskTC, removeTaskTC, tasksReducer, updateTaskTC} from "./task-reducer";
-import {addTodolistTC, TodolistDomainType} from "./todolistReducer";
 import { TaskPriorities, TaskStatuses, UpdateTaskModelType } from "api/todolist-api";
+import {addTaskTC, removeTaskTC, updateTaskTC} from "features/TodolistsList/task-actions";
+import {tasksReducer} from "features/TodolistsList/task-reducer";
+import {TodolistDomainType} from "features/TodolistsList/todolistReducer";
+import {addTodolistTC} from "features/TodolistsList/todolist-actions";
 
 let startState: TasksStateType;
 beforeEach(() => {

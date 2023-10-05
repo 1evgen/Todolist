@@ -1,12 +1,7 @@
 import {v1} from "uuid";
-import {
-    addTodolistTC,
-    changeFilter,
-    changeTodolistEntityStatus, changeTodolistTC,
-    FilterValueType, removeTodolistTC,
-    TodolistDomainType,
-    todolistsReducer,
-} from "./todolistReducer";
+import {changeFilter, changeTodolistEntityStatus, FilterValueType, TodolistDomainType, todolistsReducer,} from "./todolistReducer";
+import {addTodolistTC, changeTodolistTC, removeTodolistTC} from "features/TodolistsList/todolist-actions";
+
 
 let todolistId1 = v1();
 let todolistId2 = v1();

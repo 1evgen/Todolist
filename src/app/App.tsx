@@ -1,30 +1,19 @@
 import React, { useCallback, useEffect } from "react";
 import "./App.css";
-import {
-  AppBar,
-  Button,
-  CircularProgress,
-  Container,
-  IconButton,
-  LinearProgress,
-  Toolbar,
-  Typography,
-} from "@mui/material";
+import {AppBar, Button, CircularProgress, Container, IconButton, LinearProgress, Toolbar, Typography,} from "@mui/material";
 import { Menu } from "@mui/icons-material";
-import { TaskType } from "api/todolist-api";
-import { TodolistsList } from "features/TodolistsList/TodolistsList";
+import {TodolistsList} from "features/TodolistsList";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "./store";
 import { initializeAppTC } from "./app-reducer";
 import { ErrorSnackbar } from "Components/ErrorSnackbar/ErrorSnackbar";
 import {Route, Routes } from "react-router-dom";
-import { Login } from "features/Login/Login";
 import { logoutTC } from "features/Login/auth-reducer";
-import { selectedIsLogin, selectInitialized, selectStatus } from "./app-selectors/appSelectors";
+import { selectedIsLogin, selectInitialized, selectStatus } from "app/appSelectors";
+import {Login} from "features/Login";
 
-export type TasksStateType = {
-  [key: string]: Array<TaskType>;
-};
+
+
 type AppPropsType = {
   demo: boolean;
 };
@@ -34,7 +23,6 @@ const App = React.memo(({ demo = false, ...props }: AppPropsType) => {
   let status = useSelector(selectStatus);
   let initialized = useSelector(selectInitialized);
   const isLogin = useSelector(selectedIsLogin);
-
 
   useEffect(() => {
     dispatch(initializeAppTC());
@@ -53,7 +41,6 @@ const App = React.memo(({ demo = false, ...props }: AppPropsType) => {
   }
 
   return (
-
       <div className="App">
         <ErrorSnackbar />
         <AppBar position={"static"}>
@@ -69,7 +56,6 @@ const App = React.memo(({ demo = false, ...props }: AppPropsType) => {
             )}
           </Toolbar>
         </AppBar>
-
         {status === "loading" && <LinearProgress />}
         <Container fixed>
           <Routes>
@@ -79,7 +65,6 @@ const App = React.memo(({ demo = false, ...props }: AppPropsType) => {
           </Routes>
         </Container>
       </div>
-
   );
 });
 export default App;

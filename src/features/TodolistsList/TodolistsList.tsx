@@ -1,40 +1,31 @@
 import React, { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch} from "app/store";
-import {
-  addTodolistTC,
-  changeFilter,
-  changeTodolistTC,
-  fetchTodolistsTC,
-  FilterValueType,
-  removeTodolistTC,
-} from "./todolistReducer";
+import {AppDispatch} from "app/store";
 import { TaskStatuses } from "api/todolist-api";
-import {addTaskTC, removeTaskTC, updateTaskTC} from "./task-reducer";
 import { Grid, Paper } from "@mui/material";
 import { AddItemForm } from "Components/addItemForm/AddItemForm";
 import { Todolist } from "./todolist/Todolist";
 import { Navigate } from "react-router-dom";
-import { selectedIsLogin, selectTasks, selectTodolist } from "app/app-selectors/appSelectors";
+import { selectedIsLogin, selectTasks, selectTodolist } from "app/appSelectors";
+import {addTaskTC, removeTaskTC, updateTaskTC} from "features/TodolistsList/task-actions";
+import {addTodolistTC, changeTodolistTC, fetchTodolistsTC, removeTodolistTC} from "features/TodolistsList/todolist-actions";
+import {changeFilter, FilterValueType} from "features/TodolistsList/todolistReducer";
 
-type TodolistsListPropsType = {
-  demo?: boolean;
-};
+
+type TodolistsListPropsType = { demo?: boolean; };
+
 export const TodolistsList: React.FC<TodolistsListPropsType> = ({ demo = false }) => {
   const todolists = useSelector(selectTodolist);
   const tasks = useSelector(selectTasks);
   const isLogin = useSelector(selectedIsLogin);
   const dispatch: AppDispatch = useDispatch();
-    console.log(2)
 
   useEffect(() => {
-      console.log(4)
     if (!demo || !isLogin) {
       return;
     }
     dispatch(fetchTodolistsTC());
   }, []);
-
 
   const changeTaskStatus = useCallback(
     (todolistID: string, status: TaskStatuses, id: string) => {
