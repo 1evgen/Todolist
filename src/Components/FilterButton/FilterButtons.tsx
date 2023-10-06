@@ -23,7 +23,7 @@ export const FilterButtons = React.memo((props: FilterButtonsType) => {
   );
 
   return (
-    <div>
+    <div style={{paddingTop: '10px'}}>
       <Button variant={props.filter === "all" ? "contained" : "text"} onClick={onClickButtonAll}>
         All
       </Button>

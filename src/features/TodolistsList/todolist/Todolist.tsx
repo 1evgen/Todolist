@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect} from "react";
+import React, {useCallback} from "react";
 import {AddItemForm} from "Components/addItemForm/AddItemForm";
 import {EditableSpan} from "Components/editableSpan/EditableSpan";
 import {IconButton} from "@mui/material";
@@ -41,7 +41,8 @@ export const Todolist = React.memo(({demo = false, ...props}: TodolistType) => {
         },
         [props.changeTodolistTitle, props.todolist.id],
     );
-    let tasksForTodolist = props.tasks;
+
+        let tasksForTodolist = props.tasks;
     if (props.todolist.filter === "active") {
         tasksForTodolist = props.tasks.filter((t) => t.status === TaskStatuses.New);
     }
@@ -75,12 +76,15 @@ export const Todolist = React.memo(({demo = false, ...props}: TodolistType) => {
                             disabled={props.todolist.entityStatus === "loading"}
                         />
                     ))}
+                    {!tasksForTodolist.length && <span>No tasks</span>}
                 </ul>
+
                 <FilterButtons
                     filter={props.todolist.filter}
                     changeTodolistFilter={props.changeTodolistFilter}
                     id={props.todolist.id}
                 />
+
             </div>
         </div>
     );

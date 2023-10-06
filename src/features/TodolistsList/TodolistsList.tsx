@@ -90,14 +90,14 @@ export const TodolistsList: React.FC<TodolistsListPropsType> = ({ demo = false }
   }
   return (
     <>
-      <Grid container style={{ margin: "10px" }}>
+      <Grid container style={{ margin: "20px"  }}>
         <AddItemForm addItemForm={addTodolist} />
       </Grid>
-      <Grid container spacing={10}>
+      <Grid container spacing={3} style={{flexWrap: 'nowrap', overflowX: 'scroll'}}>
         {todolists.map((tl) => {
           return (
             <Grid item>
-              <Paper style={{ padding: "20px" }}>
+              <Paper style={{ padding: "10px", width: '280px'}}>
                 <Todolist
                   key={tl.id}
                   todolist={tl}
