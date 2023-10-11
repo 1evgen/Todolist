@@ -7,7 +7,7 @@ import { AddItemForm } from "Components/addItemForm/AddItemForm";
 import { Todolist } from "./todolist/Todolist";
 import { Navigate } from "react-router-dom";
 import { selectedIsLogin, selectTasks, selectTodolist } from "app/appSelectors";
-import {addTaskTC, removeTaskTC, updateTaskTC} from "features/TodolistsList/task-actions";
+import {addTaskTC, updateTaskTC} from "features/TodolistsList/task-actions";
 import {addTodolistTC, changeTodolistTC, fetchTodolistsTC, removeTodolistTC} from "features/TodolistsList/todolist-actions";
 import {changeFilter, FilterValueType} from "features/TodolistsList/todolistReducer";
 
@@ -30,13 +30,6 @@ export const TodolistsList: React.FC<TodolistsListPropsType> = ({ demo = false }
   const changeTaskStatus = useCallback(
     (todolistID: string, status: TaskStatuses, id: string) => {
       dispatch(updateTaskTC({todolistId: todolistID,taskId: id,domainModel:{ status }}));
-    },
-    [dispatch],
-  );
-
-  const removeTasks = useCallback(
-    (todolistID: string, id: string) => {
-      dispatch(removeTaskTC({todolistId: todolistID, taskId: id}));
     },
     [dispatch],
   );
@@ -102,7 +95,7 @@ export const TodolistsList: React.FC<TodolistsListPropsType> = ({ demo = false }
                   key={tl.id}
                   todolist={tl}
                   tasks={tasks[tl.id]}
-                  removeTasks={removeTasks}
+                  // removeTasks={removeTasks}
                   changeTodolistFilter={changeTodolistFilter}
                   addTask={addTask}
                   changeTaskStatus={changeTaskStatus}

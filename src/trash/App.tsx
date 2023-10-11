@@ -173,7 +173,6 @@ function App() {
                 <Paper style={{ padding: "20px" }}>
                   <Todolist
                     tasks={taskfiltred}
-                    removeTasks={removeTasks}
                     changeTodolistFilter={changeTodolistFilter}
                     addTask={addTask}
                     changeTaskStatus={changeTaskStatus}

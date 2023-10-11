@@ -1,15 +1,18 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Task, TasksTypeProps } from "../features/TodolistsList/todolist/task/Task";
+import { Task, TasksTypeProps } from "features/TodolistsList/todolist/task/Task";
 import { action } from "@storybook/addon-actions";
 import React, { useState } from "react";
 import { v1 } from "uuid";
-import { TaskPriorities, TaskStatuses } from "../api/todolist-api";
+import { TaskPriorities, TaskStatuses } from "api/todolist-api";
+import {ReduxStoreProviderDecorator} from "MyStories/decorator/ReduxStoreProviderDecorator";
+import {withRouter} from "storybook-addon-react-router-v6";
 
 const meta: Meta<typeof Task> = {
   title: "Todolist/Task",
   component: Task,
   tags: ["autodocs"],
   argTypes: {},
+    decorators: [ReduxStoreProviderDecorator, withRouter],
 };
 
 export default meta;
@@ -31,7 +34,6 @@ export const TaskStories: Story = {
     },
     changeTaskTitle: action("change task title"),
     changeTaskStatus: action("will be change status"),
-    removeTasks: action("will be remove task"),
   },
 };
 
@@ -40,7 +42,6 @@ export const TaskStories_2: Story = {
     <Task
       changeTaskTitle={action("change story")}
       changeTaskStatus={action("change status")}
-      removeTasks={action("remove task")}
       id={"swdedf22d1"}
       task={{
         id: "2",
@@ -65,7 +66,6 @@ export const TasksStory_3: Story = {
       <Task
         changeTaskTitle={action("change story")}
         changeTaskStatus={action("change status")}
-        removeTasks={action("remove task")}
         id={"swdedf22d1"}
         task={{
           id: "2",
@@ -84,7 +84,6 @@ export const TasksStory_3: Story = {
       <Task
         changeTaskTitle={action("change story")}
         changeTaskStatus={action("change status")}
-        removeTasks={action("remove task")}
         id={"swdedf22d2"}
         task={{
           id: v1(),
@@ -117,7 +116,7 @@ const TaskWithHook: React.FC<TasksTypeProps> = (args) => {
     <Task
       changeTaskTitle={changeTaskTitle}
       changeTaskStatus={changeTaskStatus}
-      removeTasks={args.removeTasks}
+      // removeTasks={args.removeTasks}
       id={args.id}
       task={tasks}
       disabled={true}
@@ -140,14 +139,12 @@ export const uncontrolledTask: Story = {
       priority: TaskPriorities.Low,
       description: "",
     },
-    removeTasks: action("delete task"),
   },
 
   render: (args) => (
     <TaskWithHook
       changeTaskTitle={args.changeTaskTitle}
       changeTaskStatus={args.changeTaskStatus}
-      removeTasks={args.removeTasks}
       id={args.id}
       task={args.task}
       disabled={true}

@@ -7,43 +7,12 @@ import FormGroup from "@mui/material/FormGroup";
 import FormLabel from "@mui/material/FormLabel";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import { FormikHelpers, useFormik } from "formik";
-import { validate } from "utils/validateFormLogin";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch } from "app/store";
-import { loginTC } from "./auth-reducer";
 import { Navigate } from "react-router-dom";
-import { selectedIsLogin } from "app/appSelectors";
+import {useLogin} from "features/Login/useLogin";
 
-
-export type FormValues = {
-  email: string,
-  password: string,
-  rememberMe: boolean,
-}
 
 export const Login = () => {
-  const dispatch: AppDispatch = useDispatch();
-  const isLogin = useSelector(selectedIsLogin);
-
-  const formik = useFormik({
-    initialValues: {
-      email: "",
-      password: "",
-      rememberMe: false,
-    },
-    validate,
-    onSubmit: async (values, formikHelpers: FormikHelpers<FormValues>) => {
-      const result = await dispatch(loginTC(values));
-      if (loginTC.rejected.match(result)) {
-        const err = result.payload as { fieldsErrors: Array<{ field: string, error: string }> }
-        if (err.fieldsErrors && err.fieldsErrors[0]) {
-          formikHelpers.setFieldError(err.fieldsErrors[0].field, err.fieldsErrors[0].error);
-        }
-      }
-    }
-  });
-
+  const {formik, isLogin} = useLogin()
   if (isLogin) {
     return <Navigate to="/" />;
   }

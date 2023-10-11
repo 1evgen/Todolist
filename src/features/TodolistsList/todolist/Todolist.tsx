@@ -7,14 +7,11 @@ import {FilterButtons} from "Components/FilterButton/FilterButtons";
 import {Task} from "./task/Task";
 import {FilterValueType, TodolistDomainType} from "../todolistReducer";
 import {TaskStatuses, TaskType} from "api/todolist-api";
-import {useDispatch} from "react-redux";
-import {AppDispatch} from "app/store";
 
 
 export type TodolistType = {
     todolist: TodolistDomainType;
     tasks: Array<TaskType>;
-    removeTasks: (todolistID: string, id: string) => void;
     changeTodolistFilter: (todolistID: string, titleButton: FilterValueType) => void;
     addTask: (todolistID: string, title: string) => void;
     changeTaskStatus: (todolistID: string, status: TaskStatuses, id: string) => void;
@@ -25,7 +22,6 @@ export type TodolistType = {
 };
 
 export const Todolist = React.memo(({demo = false, ...props}: TodolistType) => {
-    let dispatch: AppDispatch = useDispatch();
 
     const removeTodolistHandler = useCallback(
         () => props.removeTodolist(props.todolist.id),
@@ -50,6 +46,7 @@ export const Todolist = React.memo(({demo = false, ...props}: TodolistType) => {
         tasksForTodolist = props.tasks.filter((t) => t.status === TaskStatuses.Completed);
     }
 
+
     return (
         <div>
             <div>
@@ -65,11 +62,10 @@ export const Todolist = React.memo(({demo = false, ...props}: TodolistType) => {
                 </h3>
                 <AddItemForm addItemForm={addTask} disabled={props.todolist.entityStatus === "loading"}/>
                 <ul>
-                    {tasksForTodolist.map((t) => (
+                    {tasksForTodolist?.map((t) => (
                         <Task
                             changeTaskTitle={props.changeTaskTitle}
                             changeTaskStatus={props.changeTaskStatus}
-                            removeTasks={props.removeTasks}
                             id={props.todolist.id}
                             task={t}
                             key={t.id}
@@ -78,13 +74,11 @@ export const Todolist = React.memo(({demo = false, ...props}: TodolistType) => {
                     ))}
                     {!tasksForTodolist.length && <span>No tasks</span>}
                 </ul>
-
                 <FilterButtons
                     filter={props.todolist.filter}
                     changeTodolistFilter={props.changeTodolistFilter}
                     id={props.todolist.id}
                 />
-
             </div>
         </div>
     );
