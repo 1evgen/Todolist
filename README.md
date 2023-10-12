@@ -32,4 +32,3 @@ The project's goal was to learn architectural principles, interact with a server
 - React Router
 - Formik
 
-## The deployed project can be found at the following link: ...
